@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="94d708bc00b34f2bb9dba765b1468459" Name="Diagram1">
+        <EntityTypeShape EntityType="AuctionJobModel.ref_banque" Width="1.5" PointX="5.25" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.ref_competence_user" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.ref_status_facture" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.ref_type_carte_bancaire" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.ref_user_adress" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_adresse" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_annonce" Width="1.5" PointX="10.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_annonce_proposition" Width="1.5" PointX="12.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_carte_bancaire" Width="1.5" PointX="7.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_category_competence" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_competence" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_departement" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_group" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_level" Width="1.5" PointX="10.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_member_group" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_pays" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_pins" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_recompense" Width="1.5" PointX="8.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_recompense_user" Width="1.5" PointX="10.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_ref_facturation_historique" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_regions" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_statut_annonce" Width="1.5" PointX="8.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_type_user" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_user" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_user_info" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.t_villes" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.ref_competence_annonce" Width="1.5" PointX="15.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionJobModel.ref_competence_group" Width="1.5" PointX="13.5" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="AuctionJobModel.t_carte_bancaire_fk_t_carte_bancaire_1" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_competence_user_id_competence_user" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_competence_user_id_user_competence" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_ref_facturation_historique_fk_t_ref_facturation_historique" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_carte_bancaire_fk_t_carte_bancaire" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_user_adress_fk_adress_user" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_user_adress_fk_user_adress" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_user_info_fk_id_adresse" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_adresse_fk_t_adresse" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_competence_annonce_fk_ref_competence_annonce" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_annonce_fk_t_annonce" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_annonce_fk_t_annonce_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_annonce_fk_t_annonce_1" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_annonce_proposition_fk_t_annonce_proposition" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_annonce_proposition_fk_t_annonce_proposition_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_carte_bancaire_fk_t_carte_bancaire_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_competence_fk_t_competence" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_competence_annonce_fk_ref_competence_annonce_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_competence_group_fk_ref_competence_group" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_departement_fk_t_departement" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_villes_fk_t_villes" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_competence_group_fk_ref_competence_group_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_member_group_fk_t_member_group_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_user_info_fk_id_level" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_member_group_fk_t_member_group" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_regions_fk_t_region" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_recompense_fk_t_recompense" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_recompense_user_fk_t_recompense_user" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_recompense_user_fk_t_recompense_user_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_user_info_fk_t_user_info_0" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.t_user_info_fk_user_userinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="AuctionJobModel.ref_facturation_historique" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

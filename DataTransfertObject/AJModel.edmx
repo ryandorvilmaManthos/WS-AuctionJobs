@@ -1,0 +1,2163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AuctionJobModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ref_banque">
+          <Key>
+            <PropertyRef Name="id_banque" />
+          </Key>
+          <Property Name="id_banque" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_pays" Type="int" Nullable="false" />
+          <Property Name="banq_nom" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'auctionjob.dbo.ref_competence_annonce' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ref_competence_annonce">
+          <Key>
+            <PropertyRef Name="id_competence" />
+            <PropertyRef Name="lvl_wait" />
+            <PropertyRef Name="isactually" />
+          </Key>
+          <Property Name="id_annonce" Type="int" />
+          <Property Name="id_competence" Type="int" Nullable="false" />
+          <Property Name="lvl_wait" Type="int" Nullable="false" />
+          <Property Name="isactually" Type="smallint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'auctionjob.dbo.ref_competence_group' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ref_competence_group">
+          <Key>
+            <PropertyRef Name="id_competence" />
+            <PropertyRef Name="id_group" />
+            <PropertyRef Name="is_actually" />
+          </Key>
+          <Property Name="id_competence" Type="int" Nullable="false" />
+          <Property Name="id_group" Type="int" Nullable="false" />
+          <Property Name="is_actually" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ref_competence_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+            <PropertyRef Name="id_competence" />
+          </Key>
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_competence" Type="int" Nullable="false" />
+          <Property Name="lvl_competence" Type="int" Nullable="false" />
+          <Property Name="isactually" Type="smallint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'auctionjob.dbo.ref_facturation_historique' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ref_facturation_historique">
+          <Key>
+            <PropertyRef Name="fk_id_facturation" />
+            <PropertyRef Name="fk_id_utilisateur" />
+          </Key>
+          <Property Name="fk_id_facturation" Type="int" Nullable="false" />
+          <Property Name="fk_id_utilisateur" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'auctionjob.dbo.ref_pins_user' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ref_pins_user">
+          <Property Name="id_pins" Type="int" />
+          <Property Name="id_user" Type="int" />
+        </EntityType>-->
+        <EntityType Name="ref_status_facture">
+          <Key>
+            <PropertyRef Name="id_facture" />
+          </Key>
+          <Property Name="id_facture" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fact_nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ref_type_carte_bancaire">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tcb_nom" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ref_user_adress">
+          <Key>
+            <PropertyRef Name="id_ref_id" />
+          </Key>
+          <Property Name="fk_user_id" Type="int" Nullable="false" />
+          <Property Name="fk_adresse_id" Type="int" Nullable="false" />
+          <Property Name="id_ref_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_adresse">
+          <Key>
+            <PropertyRef Name="id_adresse" />
+          </Key>
+          <Property Name="id_adresse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ville" Type="int" Nullable="false" />
+          <Property Name="adr_libelle" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="adr_date_modification" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_annonce">
+          <Key>
+            <PropertyRef Name="id_annonce" />
+          </Key>
+          <Property Name="id_annonce" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_useradmin" Type="int" Nullable="false" />
+          <Property Name="fk_id_user_win" Type="int" />
+          <Property Name="fk_id_statutannonce" Type="int" />
+          <Property Name="fk_id_category" Type="float" />
+          <Property Name="fk_id_adresse" Type="float" Nullable="false" />
+          <Property Name="annonce_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="annonce_subtittle" Type="varchar" MaxLength="60" />
+          <Property Name="annonce_description_mission" Type="varchar(max)" Nullable="false" />
+          <Property Name="annonce_prix" Type="float" Nullable="false" />
+          <Property Name="annonce_validate" Type="smallint" Nullable="false" />
+          <Property Name="annonce_start" Type="datetime" Nullable="false" />
+          <Property Name="annonce_deadline" Type="datetime" />
+          <Property Name="annonce_modification" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_annonce_proposition">
+          <Key>
+            <PropertyRef Name="id_anno_proposition" />
+          </Key>
+          <Property Name="id_anno_proposition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_user" Type="int" Nullable="false" />
+          <Property Name="fk_id_annonce" Type="int" Nullable="false" />
+          <Property Name="annopro_description" Type="varchar" MaxLength="255" />
+          <Property Name="annopro_prix" Type="float" Nullable="false" />
+          <Property Name="annopro_create" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_carte_bancaire">
+          <Key>
+            <PropertyRef Name="id_carte_bancaire" />
+          </Key>
+          <Property Name="id_carte_bancaire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_typecarte" Type="int" Nullable="false" />
+          <Property Name="fk_id_utilisateur" Type="int" Nullable="false" />
+          <Property Name="fk_id_banque" Type="int" Nullable="false" />
+          <Property Name="cb_date_expiration" Type="date" Nullable="false" />
+          <Property Name="cb_nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cb_prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cb_prix_facturation" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="cb_crypto" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_category_competence">
+          <Key>
+            <PropertyRef Name="id_category_comp" />
+          </Key>
+          <Property Name="id_category_comp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_comp_nom" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_competence">
+          <Key>
+            <PropertyRef Name="id_competence" />
+          </Key>
+          <Property Name="id_competence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_category_com" Type="int" Nullable="false" />
+          <Property Name="competence_nom" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_departement">
+          <Key>
+            <PropertyRef Name="id_departement" />
+          </Key>
+          <Property Name="id_departement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_region" Type="int" />
+          <Property Name="departement_code" Type="varchar" MaxLength="255" />
+          <Property Name="departement_nom" Type="varchar" MaxLength="255" />
+          <Property Name="departement_nom_uppercase" Type="varchar" MaxLength="255" />
+          <Property Name="departement_slug" Type="varchar" MaxLength="255" />
+          <Property Name="departement_nom_soundex" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="t_group">
+          <Key>
+            <PropertyRef Name="id_group" />
+          </Key>
+          <Property Name="id_group" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_user_admin" Type="int" Nullable="false" />
+          <Property Name="group_nom" Type="varchar" MaxLength="255" />
+          <Property Name="group_description" Type="varchar(max)" />
+          <Property Name="group_create" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_level">
+          <Key>
+            <PropertyRef Name="id_level" />
+          </Key>
+          <Property Name="id_level" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="level_xp_up" Type="float" Nullable="false" />
+          <Property Name="level_Rank" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="t_member_group">
+          <Key>
+            <PropertyRef Name="id_member" />
+          </Key>
+          <Property Name="id_member" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_user" Type="int" Nullable="false" />
+          <Property Name="fk_id_group" Type="int" Nullable="false" />
+          <Property Name="member_group_isenable" Type="smallint" Nullable="false" />
+          <Property Name="member_group_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_pays">
+          <Key>
+            <PropertyRef Name="id_pays" />
+          </Key>
+          <Property Name="id_pays" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pays_code" Type="smallint" />
+          <Property Name="pays_alpha2" Type="varchar" MaxLength="2" />
+          <Property Name="pays_alpha3" Type="varchar" MaxLength="3" />
+          <Property Name="pays_nom_fr_fr" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="pays_nom_en_gb" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="t_pins">
+          <Key>
+            <PropertyRef Name="id_pins" />
+          </Key>
+          <Property Name="id_pins" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_type_user" Type="int" Nullable="false" />
+          <Property Name="pins_title" Type="varchar" MaxLength="100" />
+          <Property Name="pins_subtitle" Type="varchar" MaxLength="60" />
+          <Property Name="pins_description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_recompense">
+          <Key>
+            <PropertyRef Name="id_recompense" />
+          </Key>
+          <Property Name="id_recompense" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="recompense_nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="recompense_description" Type="varchar(max)" />
+          <Property Name="recompense_credit" Type="float" Nullable="false" />
+          <Property Name="recompense_xp" Type="float" Nullable="false" />
+          <Property Name="recompense_type_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_recompense_user">
+          <Key>
+            <PropertyRef Name="id_recompense_user" />
+          </Key>
+          <Property Name="id_recompense_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_id_user" Type="int" Nullable="false" />
+          <Property Name="fk_id_recompense" Type="int" />
+          <Property Name="date_obtention" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_ref_facturation_historique">
+          <Key>
+            <PropertyRef Name="id_facturation" />
+          </Key>
+          <Property Name="id_facturation" Type="int" Nullable="false" />
+          <Property Name="fk_id_statut_facturation" Type="int" />
+          <Property Name="date_modification" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_regions">
+          <Key>
+            <PropertyRef Name="id_region" />
+          </Key>
+          <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pays" Type="int" Nullable="false" />
+          <Property Name="region_nom" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_statut_annonce">
+          <Key>
+            <PropertyRef Name="id_statutannonce" />
+          </Key>
+          <Property Name="id_statutannonce" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statutannonce_nom" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_type_user">
+          <Key>
+            <PropertyRef Name="id_typeuser" />
+          </Key>
+          <Property Name="id_typeuser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeuser_nom" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_nom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="user_prenom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="user_mail" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="user_mdp" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="user_datenaissance" Type="date" />
+          <Property Name="user_isactif" Type="smallint" Nullable="false" />
+          <Property Name="user_ip" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_create" Type="datetime" Nullable="false" />
+          <Property Name="user_modif" Type="datetime" Nullable="false" />
+          <Property Name="user_last_connexion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_user_info">
+          <Key>
+            <PropertyRef Name="id_fk_user" />
+            <PropertyRef Name="fk_id_typeuser" />
+          </Key>
+          <Property Name="id_fk_user" Type="int" Nullable="false" />
+          <Property Name="fk_id_typeuser" Type="int" Nullable="false" />
+          <Property Name="fk_id_adresse" Type="int" />
+          <Property Name="fk_id_level" Type="int" />
+          <Property Name="userinfo_exp" Type="float" Nullable="false" />
+          <Property Name="userinfo_image" Type="varbinary(max)" />
+          <Property Name="userinfo_date_modfif" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_villes">
+          <Key>
+            <PropertyRef Name="id_villes" />
+          </Key>
+          <Property Name="id_villes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_departement" Type="int" />
+          <Property Name="ville_slug" Type="varchar" MaxLength="255" />
+          <Property Name="ville_nom" Type="varchar" MaxLength="45" />
+          <Property Name="ville_nom_simple" Type="varchar" MaxLength="45" />
+          <Property Name="ville_nom_reel" Type="varchar" MaxLength="45" />
+          <Property Name="ville_nom_soundex" Type="varchar" MaxLength="20" />
+          <Property Name="ville_nom_metaphone" Type="varchar" MaxLength="22" />
+          <Property Name="ville_code_postal" Type="varchar" MaxLength="255" />
+          <Property Name="ville_commune" Type="varchar" MaxLength="3" />
+          <Property Name="ville_code_commune" Type="varchar" MaxLength="5" />
+          <Property Name="ville_arrondissement" Type="smallint" />
+          <Property Name="ville_canton" Type="varchar" MaxLength="4" />
+          <Property Name="ville_amdi" Type="smallint" />
+          <Property Name="ville_longitude_deg" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="ville_latitude_deg" Type="numeric" Precision="12" Scale="0" />
+        </EntityType>
+        <Association Name="ref_competence_annonce$fk_ref_competence_annonce">
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="0..1" />
+          <End Role="ref_competence_annonce" Type="Self.ref_competence_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_annonce">
+              <PropertyRef Name="id_annonce" />
+            </Principal>
+            <Dependent Role="ref_competence_annonce">
+              <PropertyRef Name="id_annonce" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_annonce$fk_ref_competence_annonce_0">
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="1" />
+          <End Role="ref_competence_annonce" Type="Self.ref_competence_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_competence">
+              <PropertyRef Name="id_competence" />
+            </Principal>
+            <Dependent Role="ref_competence_annonce">
+              <PropertyRef Name="id_competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_group$fk_ref_competence_group">
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="1" />
+          <End Role="ref_competence_group" Type="Self.ref_competence_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_competence">
+              <PropertyRef Name="id_competence" />
+            </Principal>
+            <Dependent Role="ref_competence_group">
+              <PropertyRef Name="id_competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_group$fk_ref_competence_group_0">
+          <End Role="t_group" Type="Self.t_group" Multiplicity="1" />
+          <End Role="ref_competence_group" Type="Self.ref_competence_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_group">
+              <PropertyRef Name="id_group" />
+            </Principal>
+            <Dependent Role="ref_competence_group">
+              <PropertyRef Name="id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_user$id_competence_user">
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_competence_user" Type="Self.ref_competence_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_competence">
+              <PropertyRef Name="id_competence" />
+            </Principal>
+            <Dependent Role="ref_competence_user">
+              <PropertyRef Name="id_competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_user$id_user_competence">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_competence_user" Type="Self.ref_competence_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="ref_competence_user">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_facturation_historique$fk_ref_facturation_historique">
+          <End Role="t_ref_facturation_historique" Type="Self.t_ref_facturation_historique" Multiplicity="1" />
+          <End Role="ref_facturation_historique" Type="Self.ref_facturation_historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_ref_facturation_historique">
+              <PropertyRef Name="id_facturation" />
+            </Principal>
+            <Dependent Role="ref_facturation_historique">
+              <PropertyRef Name="fk_id_facturation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_facturation_historique$fk_ref_facturation_historique_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="ref_facturation_historique" Type="Self.ref_facturation_historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="ref_facturation_historique">
+              <PropertyRef Name="fk_id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'auctionjob.dbo.ref_pins_user' is referenced by a relationship, but cannot be found.
+        <Association Name="ref_pins_user$fk_ref_pins_user" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'auctionjob.dbo.ref_pins_user' is referenced by a relationship, but cannot be found.
+        <Association Name="ref_pins_user$fk_ref_pins_user_0" />-->
+        <Association Name="ref_user_adress$fk_adress_user">
+          <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_adresse">
+              <PropertyRef Name="id_adresse" />
+            </Principal>
+            <Dependent Role="ref_user_adress">
+              <PropertyRef Name="fk_adresse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_user_adress$fk_user_adress">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="ref_user_adress">
+              <PropertyRef Name="fk_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_adresse$fk_t_adresse">
+          <End Role="t_villes" Type="Self.t_villes" Multiplicity="1" />
+          <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_villes">
+              <PropertyRef Name="id_villes" />
+            </Principal>
+            <Dependent Role="t_adresse">
+              <PropertyRef Name="id_ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce$fk_t_annonce">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_annonce">
+              <PropertyRef Name="fk_id_useradmin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce$fk_t_annonce_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="0..1" />
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_annonce">
+              <PropertyRef Name="fk_id_user_win" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce$fk_t_annonce_1">
+          <End Role="t_statut_annonce" Type="Self.t_statut_annonce" Multiplicity="0..1" />
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_statut_annonce">
+              <PropertyRef Name="id_statutannonce" />
+            </Principal>
+            <Dependent Role="t_annonce">
+              <PropertyRef Name="fk_id_statutannonce" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_proposition$fk_t_annonce_proposition">
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="1" />
+          <End Role="t_annonce_proposition" Type="Self.t_annonce_proposition" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="t_annonce">
+              <PropertyRef Name="id_annonce" />
+            </Principal>
+            <Dependent Role="t_annonce_proposition">
+              <PropertyRef Name="id_anno_proposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_proposition$fk_t_annonce_proposition_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_annonce_proposition" Type="Self.t_annonce_proposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_annonce_proposition">
+              <PropertyRef Name="fk_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_carte_bancaire$fk_t_carte_bancaire">
+          <End Role="ref_type_carte_bancaire" Type="Self.ref_type_carte_bancaire" Multiplicity="1" />
+          <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_type_carte_bancaire">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="t_carte_bancaire">
+              <PropertyRef Name="fk_id_typecarte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_carte_bancaire$fk_t_carte_bancaire_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_carte_bancaire">
+              <PropertyRef Name="fk_id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_carte_bancaire$fk_t_carte_bancaire_1">
+          <End Role="ref_banque" Type="Self.ref_banque" Multiplicity="1" />
+          <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_banque">
+              <PropertyRef Name="id_banque" />
+            </Principal>
+            <Dependent Role="t_carte_bancaire">
+              <PropertyRef Name="fk_id_banque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_competence$fk_t_competence">
+          <End Role="t_category_competence" Type="Self.t_category_competence" Multiplicity="1" />
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_category_competence">
+              <PropertyRef Name="id_category_comp" />
+            </Principal>
+            <Dependent Role="t_competence">
+              <PropertyRef Name="fk_id_category_com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_departement$fk_t_departement">
+          <End Role="t_regions" Type="Self.t_regions" Multiplicity="0..1" />
+          <End Role="t_departement" Type="Self.t_departement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_regions">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="t_departement">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_member_group$fk_t_member_group">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_member_group" Type="Self.t_member_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_member_group">
+              <PropertyRef Name="fk_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_member_group$fk_t_member_group_0">
+          <End Role="t_group" Type="Self.t_group" Multiplicity="1" />
+          <End Role="t_member_group" Type="Self.t_member_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_group">
+              <PropertyRef Name="id_group" />
+            </Principal>
+            <Dependent Role="t_member_group">
+              <PropertyRef Name="fk_id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_recompense$fk_t_recompense">
+          <End Role="t_type_user" Type="Self.t_type_user" Multiplicity="1" />
+          <End Role="t_recompense" Type="Self.t_recompense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_type_user">
+              <PropertyRef Name="id_typeuser" />
+            </Principal>
+            <Dependent Role="t_recompense">
+              <PropertyRef Name="recompense_type_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_recompense_user$fk_t_recompense_user">
+          <End Role="t_recompense" Type="Self.t_recompense" Multiplicity="0..1" />
+          <End Role="t_recompense_user" Type="Self.t_recompense_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_recompense">
+              <PropertyRef Name="id_recompense" />
+            </Principal>
+            <Dependent Role="t_recompense_user">
+              <PropertyRef Name="fk_id_recompense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_recompense_user$fk_t_recompense_user_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_recompense_user" Type="Self.t_recompense_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_recompense_user">
+              <PropertyRef Name="fk_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ref_facturation_historique$fk_t_ref_facturation_historique">
+          <End Role="ref_status_facture" Type="Self.ref_status_facture" Multiplicity="0..1" />
+          <End Role="t_ref_facturation_historique" Type="Self.t_ref_facturation_historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_status_facture">
+              <PropertyRef Name="id_facture" />
+            </Principal>
+            <Dependent Role="t_ref_facturation_historique">
+              <PropertyRef Name="fk_id_statut_facturation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_regions$fk_t_region">
+          <End Role="t_pays" Type="Self.t_pays" Multiplicity="1" />
+          <End Role="t_regions" Type="Self.t_regions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_pays">
+              <PropertyRef Name="id_pays" />
+            </Principal>
+            <Dependent Role="t_regions">
+              <PropertyRef Name="id_pays" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info$fk_id_adresse">
+          <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="0..1" />
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_user_adress">
+              <PropertyRef Name="id_ref_id" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="fk_id_adresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info$fk_id_level">
+          <End Role="t_level" Type="Self.t_level" Multiplicity="0..1" />
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_level">
+              <PropertyRef Name="id_level" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="fk_id_level" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info$fk_t_user_info_0">
+          <End Role="t_type_user" Type="Self.t_type_user" Multiplicity="1" />
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_type_user">
+              <PropertyRef Name="id_typeuser" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="fk_id_typeuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info$fk_user_userinfo">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="id_fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_villes$fk_t_villes">
+          <End Role="t_departement" Type="Self.t_departement" Multiplicity="0..1" />
+          <End Role="t_villes" Type="Self.t_villes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_departement">
+              <PropertyRef Name="id_departement" />
+            </Principal>
+            <Dependent Role="t_villes">
+              <PropertyRef Name="id_departement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuctionJobModelStoreContainer">
+          <EntitySet Name="ref_banque" EntityType="Self.ref_banque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_competence_user" EntityType="Self.ref_competence_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_status_facture" EntityType="Self.ref_status_facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_type_carte_bancaire" EntityType="Self.ref_type_carte_bancaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_user_adress" EntityType="Self.ref_user_adress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_adresse" EntityType="Self.t_adresse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_annonce" EntityType="Self.t_annonce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_annonce_proposition" EntityType="Self.t_annonce_proposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_carte_bancaire" EntityType="Self.t_carte_bancaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_category_competence" EntityType="Self.t_category_competence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_competence" EntityType="Self.t_competence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_departement" EntityType="Self.t_departement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_group" EntityType="Self.t_group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_level" EntityType="Self.t_level" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_member_group" EntityType="Self.t_member_group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_pays" EntityType="Self.t_pays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_pins" EntityType="Self.t_pins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_recompense" EntityType="Self.t_recompense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_recompense_user" EntityType="Self.t_recompense_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_ref_facturation_historique" EntityType="Self.t_ref_facturation_historique" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_regions" EntityType="Self.t_regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_statut_annonce" EntityType="Self.t_statut_annonce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_type_user" EntityType="Self.t_type_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user_info" EntityType="Self.t_user_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_villes" EntityType="Self.t_villes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_competence_annonce" EntityType="Self.ref_competence_annonce" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ref_competence_annonce].[id_annonce] AS [id_annonce], 
+    [ref_competence_annonce].[id_competence] AS [id_competence], 
+    [ref_competence_annonce].[lvl_wait] AS [lvl_wait], 
+    [ref_competence_annonce].[isactually] AS [isactually]
+    FROM [dbo].[ref_competence_annonce] AS [ref_competence_annonce]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ref_competence_group" EntityType="Self.ref_competence_group" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ref_competence_group].[id_competence] AS [id_competence], 
+    [ref_competence_group].[id_group] AS [id_group], 
+    [ref_competence_group].[is_actually] AS [is_actually]
+    FROM [dbo].[ref_competence_group] AS [ref_competence_group]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ref_facturation_historique" EntityType="Self.ref_facturation_historique" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ref_facturation_historique].[fk_id_facturation] AS [fk_id_facturation], 
+    [ref_facturation_historique].[fk_id_utilisateur] AS [fk_id_utilisateur]
+    FROM [dbo].[ref_facturation_historique] AS [ref_facturation_historique]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="ref_competence_annonce$fk_ref_competence_annonce" Association="Self.ref_competence_annonce$fk_ref_competence_annonce">
+            <End Role="t_annonce" EntitySet="t_annonce" />
+            <End Role="ref_competence_annonce" EntitySet="ref_competence_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_annonce$fk_ref_competence_annonce_0" Association="Self.ref_competence_annonce$fk_ref_competence_annonce_0">
+            <End Role="t_competence" EntitySet="t_competence" />
+            <End Role="ref_competence_annonce" EntitySet="ref_competence_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_group$fk_ref_competence_group" Association="Self.ref_competence_group$fk_ref_competence_group">
+            <End Role="t_competence" EntitySet="t_competence" />
+            <End Role="ref_competence_group" EntitySet="ref_competence_group" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_group$fk_ref_competence_group_0" Association="Self.ref_competence_group$fk_ref_competence_group_0">
+            <End Role="t_group" EntitySet="t_group" />
+            <End Role="ref_competence_group" EntitySet="ref_competence_group" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_user$id_competence_user" Association="Self.ref_competence_user$id_competence_user">
+            <End Role="t_competence" EntitySet="t_competence" />
+            <End Role="ref_competence_user" EntitySet="ref_competence_user" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_user$id_user_competence" Association="Self.ref_competence_user$id_user_competence">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="ref_competence_user" EntitySet="ref_competence_user" />
+          </AssociationSet>
+          <AssociationSet Name="ref_facturation_historique$fk_ref_facturation_historique" Association="Self.ref_facturation_historique$fk_ref_facturation_historique">
+            <End Role="t_ref_facturation_historique" EntitySet="t_ref_facturation_historique" />
+            <End Role="ref_facturation_historique" EntitySet="ref_facturation_historique" />
+          </AssociationSet>
+          <AssociationSet Name="ref_facturation_historique$fk_ref_facturation_historique_0" Association="Self.ref_facturation_historique$fk_ref_facturation_historique_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="ref_facturation_historique" EntitySet="ref_facturation_historique" />
+          </AssociationSet>
+          <AssociationSet Name="ref_user_adress$fk_adress_user" Association="Self.ref_user_adress$fk_adress_user">
+            <End Role="t_adresse" EntitySet="t_adresse" />
+            <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+          </AssociationSet>
+          <AssociationSet Name="ref_user_adress$fk_user_adress" Association="Self.ref_user_adress$fk_user_adress">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+          </AssociationSet>
+          <AssociationSet Name="t_adresse$fk_t_adresse" Association="Self.t_adresse$fk_t_adresse">
+            <End Role="t_villes" EntitySet="t_villes" />
+            <End Role="t_adresse" EntitySet="t_adresse" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce$fk_t_annonce" Association="Self.t_annonce$fk_t_annonce">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_annonce" EntitySet="t_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce$fk_t_annonce_0" Association="Self.t_annonce$fk_t_annonce_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_annonce" EntitySet="t_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce$fk_t_annonce_1" Association="Self.t_annonce$fk_t_annonce_1">
+            <End Role="t_statut_annonce" EntitySet="t_statut_annonce" />
+            <End Role="t_annonce" EntitySet="t_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_proposition$fk_t_annonce_proposition" Association="Self.t_annonce_proposition$fk_t_annonce_proposition">
+            <End Role="t_annonce" EntitySet="t_annonce" />
+            <End Role="t_annonce_proposition" EntitySet="t_annonce_proposition" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_proposition$fk_t_annonce_proposition_0" Association="Self.t_annonce_proposition$fk_t_annonce_proposition_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_annonce_proposition" EntitySet="t_annonce_proposition" />
+          </AssociationSet>
+          <AssociationSet Name="t_carte_bancaire$fk_t_carte_bancaire" Association="Self.t_carte_bancaire$fk_t_carte_bancaire">
+            <End Role="ref_type_carte_bancaire" EntitySet="ref_type_carte_bancaire" />
+            <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+          </AssociationSet>
+          <AssociationSet Name="t_carte_bancaire$fk_t_carte_bancaire_0" Association="Self.t_carte_bancaire$fk_t_carte_bancaire_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+          </AssociationSet>
+          <AssociationSet Name="t_carte_bancaire$fk_t_carte_bancaire_1" Association="Self.t_carte_bancaire$fk_t_carte_bancaire_1">
+            <End Role="ref_banque" EntitySet="ref_banque" />
+            <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+          </AssociationSet>
+          <AssociationSet Name="t_competence$fk_t_competence" Association="Self.t_competence$fk_t_competence">
+            <End Role="t_category_competence" EntitySet="t_category_competence" />
+            <End Role="t_competence" EntitySet="t_competence" />
+          </AssociationSet>
+          <AssociationSet Name="t_departement$fk_t_departement" Association="Self.t_departement$fk_t_departement">
+            <End Role="t_regions" EntitySet="t_regions" />
+            <End Role="t_departement" EntitySet="t_departement" />
+          </AssociationSet>
+          <AssociationSet Name="t_member_group$fk_t_member_group" Association="Self.t_member_group$fk_t_member_group">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_member_group" EntitySet="t_member_group" />
+          </AssociationSet>
+          <AssociationSet Name="t_member_group$fk_t_member_group_0" Association="Self.t_member_group$fk_t_member_group_0">
+            <End Role="t_group" EntitySet="t_group" />
+            <End Role="t_member_group" EntitySet="t_member_group" />
+          </AssociationSet>
+          <AssociationSet Name="t_recompense$fk_t_recompense" Association="Self.t_recompense$fk_t_recompense">
+            <End Role="t_type_user" EntitySet="t_type_user" />
+            <End Role="t_recompense" EntitySet="t_recompense" />
+          </AssociationSet>
+          <AssociationSet Name="t_recompense_user$fk_t_recompense_user" Association="Self.t_recompense_user$fk_t_recompense_user">
+            <End Role="t_recompense" EntitySet="t_recompense" />
+            <End Role="t_recompense_user" EntitySet="t_recompense_user" />
+          </AssociationSet>
+          <AssociationSet Name="t_recompense_user$fk_t_recompense_user_0" Association="Self.t_recompense_user$fk_t_recompense_user_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_recompense_user" EntitySet="t_recompense_user" />
+          </AssociationSet>
+          <AssociationSet Name="t_ref_facturation_historique$fk_t_ref_facturation_historique" Association="Self.t_ref_facturation_historique$fk_t_ref_facturation_historique">
+            <End Role="ref_status_facture" EntitySet="ref_status_facture" />
+            <End Role="t_ref_facturation_historique" EntitySet="t_ref_facturation_historique" />
+          </AssociationSet>
+          <AssociationSet Name="t_regions$fk_t_region" Association="Self.t_regions$fk_t_region">
+            <End Role="t_pays" EntitySet="t_pays" />
+            <End Role="t_regions" EntitySet="t_regions" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info$fk_id_adresse" Association="Self.t_user_info$fk_id_adresse">
+            <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info$fk_id_level" Association="Self.t_user_info$fk_id_level">
+            <End Role="t_level" EntitySet="t_level" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info$fk_t_user_info_0" Association="Self.t_user_info$fk_t_user_info_0">
+            <End Role="t_type_user" EntitySet="t_type_user" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info$fk_user_userinfo" Association="Self.t_user_info$fk_user_userinfo">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_villes$fk_t_villes" Association="Self.t_villes$fk_t_villes">
+            <End Role="t_departement" EntitySet="t_departement" />
+            <End Role="t_villes" EntitySet="t_villes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuctionJobModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ref_banque">
+          <Key>
+            <PropertyRef Name="id_banque" />
+          </Key>
+          <Property Name="id_banque" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_pays" Type="Int32" Nullable="false" />
+          <Property Name="banq_nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="t_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_1" FromRole="ref_banque" ToRole="t_carte_bancaire" />
+        </EntityType>
+        <EntityType Name="ref_competence_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+            <PropertyRef Name="id_competence" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_competence" Type="Int32" Nullable="false" />
+          <Property Name="lvl_competence" Type="Int32" Nullable="false" />
+          <Property Name="isactually" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="t_competence" Relationship="Self.ref_competence_user_id_competence_user" FromRole="ref_competence_user" ToRole="t_competence" />
+          <NavigationProperty Name="t_user" Relationship="Self.ref_competence_user_id_user_competence" FromRole="ref_competence_user" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="ref_status_facture">
+          <Key>
+            <PropertyRef Name="id_facture" />
+          </Key>
+          <Property Name="id_facture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fact_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="t_ref_facturation_historique" Relationship="Self.t_ref_facturation_historique_fk_t_ref_facturation_historique" FromRole="ref_status_facture" ToRole="t_ref_facturation_historique" />
+        </EntityType>
+        <EntityType Name="ref_type_carte_bancaire">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tcb_nom" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="t_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire" FromRole="ref_type_carte_bancaire" ToRole="t_carte_bancaire" />
+        </EntityType>
+        <EntityType Name="ref_user_adress">
+          <Key>
+            <PropertyRef Name="id_ref_id" />
+          </Key>
+          <Property Name="fk_user_id" Type="Int32" Nullable="false" />
+          <Property Name="fk_adresse_id" Type="Int32" Nullable="false" />
+          <Property Name="id_ref_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="t_adresse" Relationship="Self.ref_user_adress_fk_adress_user" FromRole="ref_user_adress" ToRole="t_adresse" />
+          <NavigationProperty Name="t_user" Relationship="Self.ref_user_adress_fk_user_adress" FromRole="ref_user_adress" ToRole="t_user" />
+          <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_id_adresse" FromRole="ref_user_adress" ToRole="t_user_info" />
+        </EntityType>
+        <EntityType Name="t_adresse">
+          <Key>
+            <PropertyRef Name="id_adresse" />
+          </Key>
+          <Property Name="id_adresse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ville" Type="Int32" Nullable="false" />
+          <Property Name="adr_libelle" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adr_date_modification" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ref_user_adress" Relationship="Self.ref_user_adress_fk_adress_user" FromRole="t_adresse" ToRole="ref_user_adress" />
+          <NavigationProperty Name="t_villes" Relationship="Self.t_adresse_fk_t_adresse" FromRole="t_adresse" ToRole="t_villes" />
+        </EntityType>
+        <EntityType Name="t_annonce">
+          <Key>
+            <PropertyRef Name="id_annonce" />
+          </Key>
+          <Property Name="id_annonce" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_useradmin" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_user_win" Type="Int32" />
+          <Property Name="fk_id_statutannonce" Type="Int32" />
+          <Property Name="fk_id_category" Type="Double" />
+          <Property Name="fk_id_adresse" Type="Double" Nullable="false" />
+          <Property Name="annonce_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="annonce_subtittle" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="annonce_description_mission" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="annonce_prix" Type="Double" Nullable="false" />
+          <Property Name="annonce_validate" Type="Int16" Nullable="false" />
+          <Property Name="annonce_start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="annonce_deadline" Type="DateTime" Precision="3" />
+          <Property Name="annonce_modification" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ref_competence_annonce" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce" FromRole="t_annonce" ToRole="ref_competence_annonce" />
+          <NavigationProperty Name="t_user" Relationship="Self.t_annonce_fk_t_annonce" FromRole="t_annonce" ToRole="t_user" />
+          <NavigationProperty Name="t_user1" Relationship="Self.t_annonce_fk_t_annonce_0" FromRole="t_annonce" ToRole="t_user" />
+          <NavigationProperty Name="t_statut_annonce" Relationship="Self.t_annonce_fk_t_annonce_1" FromRole="t_annonce" ToRole="t_statut_annonce" />
+          <NavigationProperty Name="t_annonce_proposition" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition" FromRole="t_annonce" ToRole="t_annonce_proposition" />
+        </EntityType>
+        <EntityType Name="t_annonce_proposition">
+          <Key>
+            <PropertyRef Name="id_anno_proposition" />
+          </Key>
+          <Property Name="id_anno_proposition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_user" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_annonce" Type="Int32" Nullable="false" />
+          <Property Name="annopro_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="annopro_prix" Type="Double" Nullable="false" />
+          <Property Name="annopro_create" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_annonce" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition" FromRole="t_annonce_proposition" ToRole="t_annonce" />
+          <NavigationProperty Name="t_user" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition_0" FromRole="t_annonce_proposition" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_carte_bancaire">
+          <Key>
+            <PropertyRef Name="id_carte_bancaire" />
+          </Key>
+          <Property Name="id_carte_bancaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_typecarte" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_utilisateur" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_banque" Type="Int32" Nullable="false" />
+          <Property Name="cb_date_expiration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cb_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cb_prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cb_prix_facturation" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="cb_crypto" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ref_banque" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_1" FromRole="t_carte_bancaire" ToRole="ref_banque" />
+          <NavigationProperty Name="ref_type_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire" FromRole="t_carte_bancaire" ToRole="ref_type_carte_bancaire" />
+          <NavigationProperty Name="t_user" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_0" FromRole="t_carte_bancaire" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_category_competence">
+          <Key>
+            <PropertyRef Name="id_category_comp" />
+          </Key>
+          <Property Name="id_category_comp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_comp_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="t_competence" Relationship="Self.t_competence_fk_t_competence" FromRole="t_category_competence" ToRole="t_competence" />
+        </EntityType>
+        <EntityType Name="t_competence">
+          <Key>
+            <PropertyRef Name="id_competence" />
+          </Key>
+          <Property Name="id_competence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_category_com" Type="Int32" Nullable="false" />
+          <Property Name="competence_nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ref_competence_user" Relationship="Self.ref_competence_user_id_competence_user" FromRole="t_competence" ToRole="ref_competence_user" />
+          <NavigationProperty Name="t_category_competence" Relationship="Self.t_competence_fk_t_competence" FromRole="t_competence" ToRole="t_category_competence" />
+          <NavigationProperty Name="ref_competence_annonce" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce_0" FromRole="t_competence" ToRole="ref_competence_annonce" />
+          <NavigationProperty Name="ref_competence_group" Relationship="Self.ref_competence_group_fk_ref_competence_group" FromRole="t_competence" ToRole="ref_competence_group" />
+        </EntityType>
+        <EntityType Name="t_departement">
+          <Key>
+            <PropertyRef Name="id_departement" />
+          </Key>
+          <Property Name="id_departement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_region" Type="Int32" />
+          <Property Name="departement_code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="departement_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="departement_nom_uppercase" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="departement_slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="departement_nom_soundex" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_regions" Relationship="Self.t_departement_fk_t_departement" FromRole="t_departement" ToRole="t_regions" />
+          <NavigationProperty Name="t_villes" Relationship="Self.t_villes_fk_t_villes" FromRole="t_departement" ToRole="t_villes" />
+        </EntityType>
+        <EntityType Name="t_group">
+          <Key>
+            <PropertyRef Name="id_group" />
+          </Key>
+          <Property Name="id_group" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_user_admin" Type="Int32" Nullable="false" />
+          <Property Name="group_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="group_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="group_create" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ref_competence_group" Relationship="Self.ref_competence_group_fk_ref_competence_group_0" FromRole="t_group" ToRole="ref_competence_group" />
+          <NavigationProperty Name="t_member_group" Relationship="Self.t_member_group_fk_t_member_group_0" FromRole="t_group" ToRole="t_member_group" />
+        </EntityType>
+        <EntityType Name="t_level">
+          <Key>
+            <PropertyRef Name="id_level" />
+          </Key>
+          <Property Name="id_level" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="level_xp_up" Type="Double" Nullable="false" />
+          <Property Name="level_Rank" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_id_level" FromRole="t_level" ToRole="t_user_info" />
+        </EntityType>
+        <EntityType Name="t_member_group">
+          <Key>
+            <PropertyRef Name="id_member" />
+          </Key>
+          <Property Name="id_member" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_user" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_group" Type="Int32" Nullable="false" />
+          <Property Name="member_group_isenable" Type="Int16" Nullable="false" />
+          <Property Name="member_group_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_group" Relationship="Self.t_member_group_fk_t_member_group_0" FromRole="t_member_group" ToRole="t_group" />
+          <NavigationProperty Name="t_user" Relationship="Self.t_member_group_fk_t_member_group" FromRole="t_member_group" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_pays">
+          <Key>
+            <PropertyRef Name="id_pays" />
+          </Key>
+          <Property Name="id_pays" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pays_code" Type="Int16" />
+          <Property Name="pays_alpha2" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="pays_alpha3" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="pays_nom_fr_fr" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pays_nom_en_gb" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_regions" Relationship="Self.t_regions_fk_t_region" FromRole="t_pays" ToRole="t_regions" />
+        </EntityType>
+        <EntityType Name="t_pins">
+          <Key>
+            <PropertyRef Name="id_pins" />
+          </Key>
+          <Property Name="id_pins" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_type_user" Type="Int32" Nullable="false" />
+          <Property Name="pins_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pins_subtitle" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="pins_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_recompense">
+          <Key>
+            <PropertyRef Name="id_recompense" />
+          </Key>
+          <Property Name="id_recompense" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="recompense_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="recompense_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="recompense_credit" Type="Double" Nullable="false" />
+          <Property Name="recompense_xp" Type="Double" Nullable="false" />
+          <Property Name="recompense_type_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="t_type_user" Relationship="Self.t_recompense_fk_t_recompense" FromRole="t_recompense" ToRole="t_type_user" />
+          <NavigationProperty Name="t_recompense_user" Relationship="Self.t_recompense_user_fk_t_recompense_user" FromRole="t_recompense" ToRole="t_recompense_user" />
+        </EntityType>
+        <EntityType Name="t_recompense_user">
+          <Key>
+            <PropertyRef Name="id_recompense_user" />
+          </Key>
+          <Property Name="id_recompense_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_id_user" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_recompense" Type="Int32" />
+          <Property Name="date_obtention" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_recompense" Relationship="Self.t_recompense_user_fk_t_recompense_user" FromRole="t_recompense_user" ToRole="t_recompense" />
+          <NavigationProperty Name="t_user" Relationship="Self.t_recompense_user_fk_t_recompense_user_0" FromRole="t_recompense_user" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_ref_facturation_historique">
+          <Key>
+            <PropertyRef Name="id_facturation" />
+          </Key>
+          <Property Name="id_facturation" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_statut_facturation" Type="Int32" />
+          <Property Name="date_modification" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ref_status_facture" Relationship="Self.t_ref_facturation_historique_fk_t_ref_facturation_historique" FromRole="t_ref_facturation_historique" ToRole="ref_status_facture" />
+          <NavigationProperty Name="t_user" Relationship="Self.ref_facturation_historique" FromRole="t_ref_facturation_historique" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_regions">
+          <Key>
+            <PropertyRef Name="id_region" />
+          </Key>
+          <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pays" Type="Int32" Nullable="false" />
+          <Property Name="region_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_departement" Relationship="Self.t_departement_fk_t_departement" FromRole="t_regions" ToRole="t_departement" />
+          <NavigationProperty Name="t_pays" Relationship="Self.t_regions_fk_t_region" FromRole="t_regions" ToRole="t_pays" />
+        </EntityType>
+        <EntityType Name="t_statut_annonce">
+          <Key>
+            <PropertyRef Name="id_statutannonce" />
+          </Key>
+          <Property Name="id_statutannonce" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statutannonce_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="t_annonce" Relationship="Self.t_annonce_fk_t_annonce_1" FromRole="t_statut_annonce" ToRole="t_annonce" />
+        </EntityType>
+        <EntityType Name="t_type_user">
+          <Key>
+            <PropertyRef Name="id_typeuser" />
+          </Key>
+          <Property Name="id_typeuser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeuser_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="t_recompense" Relationship="Self.t_recompense_fk_t_recompense" FromRole="t_type_user" ToRole="t_recompense" />
+          <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_t_user_info_0" FromRole="t_type_user" ToRole="t_user_info" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_prenom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_mail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_mdp" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_datenaissance" Type="DateTime" Precision="0" />
+          <Property Name="user_isactif" Type="Int16" Nullable="false" />
+          <Property Name="user_ip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_create" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_modif" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_last_connexion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ref_competence_user" Relationship="Self.ref_competence_user_id_user_competence" FromRole="t_user" ToRole="ref_competence_user" />
+          <NavigationProperty Name="ref_user_adress" Relationship="Self.ref_user_adress_fk_user_adress" FromRole="t_user" ToRole="ref_user_adress" />
+          <NavigationProperty Name="t_annonce" Relationship="Self.t_annonce_fk_t_annonce" FromRole="t_user" ToRole="t_annonce" />
+          <NavigationProperty Name="t_annonce1" Relationship="Self.t_annonce_fk_t_annonce_0" FromRole="t_user" ToRole="t_annonce" />
+          <NavigationProperty Name="t_annonce_proposition" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition_0" FromRole="t_user" ToRole="t_annonce_proposition" />
+          <NavigationProperty Name="t_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_0" FromRole="t_user" ToRole="t_carte_bancaire" />
+          <NavigationProperty Name="t_member_group" Relationship="Self.t_member_group_fk_t_member_group" FromRole="t_user" ToRole="t_member_group" />
+          <NavigationProperty Name="t_recompense_user" Relationship="Self.t_recompense_user_fk_t_recompense_user_0" FromRole="t_user" ToRole="t_recompense_user" />
+          <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_user_userinfo" FromRole="t_user" ToRole="t_user_info" />
+          <NavigationProperty Name="t_ref_facturation_historique" Relationship="Self.ref_facturation_historique" FromRole="t_user" ToRole="t_ref_facturation_historique" />
+        </EntityType>
+        <EntityType Name="t_user_info">
+          <Key>
+            <PropertyRef Name="id_fk_user" />
+            <PropertyRef Name="fk_id_typeuser" />
+          </Key>
+          <Property Name="id_fk_user" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_typeuser" Type="Int32" Nullable="false" />
+          <Property Name="fk_id_adresse" Type="Int32" />
+          <Property Name="fk_id_level" Type="Int32" />
+          <Property Name="userinfo_exp" Type="Double" Nullable="false" />
+          <Property Name="userinfo_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="userinfo_date_modfif" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ref_user_adress" Relationship="Self.t_user_info_fk_id_adresse" FromRole="t_user_info" ToRole="ref_user_adress" />
+          <NavigationProperty Name="t_level" Relationship="Self.t_user_info_fk_id_level" FromRole="t_user_info" ToRole="t_level" />
+          <NavigationProperty Name="t_type_user" Relationship="Self.t_user_info_fk_t_user_info_0" FromRole="t_user_info" ToRole="t_type_user" />
+          <NavigationProperty Name="t_user" Relationship="Self.t_user_info_fk_user_userinfo" FromRole="t_user_info" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_villes">
+          <Key>
+            <PropertyRef Name="id_villes" />
+          </Key>
+          <Property Name="id_villes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_departement" Type="Int32" />
+          <Property Name="ville_slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ville_nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ville_nom_simple" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ville_nom_reel" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ville_nom_soundex" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ville_nom_metaphone" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="ville_code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ville_commune" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ville_code_commune" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ville_arrondissement" Type="Int16" />
+          <Property Name="ville_canton" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="ville_amdi" Type="Int16" />
+          <Property Name="ville_longitude_deg" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="ville_latitude_deg" Type="Decimal" Precision="12" Scale="0" />
+          <NavigationProperty Name="t_adresse" Relationship="Self.t_adresse_fk_t_adresse" FromRole="t_villes" ToRole="t_adresse" />
+          <NavigationProperty Name="t_departement" Relationship="Self.t_villes_fk_t_villes" FromRole="t_villes" ToRole="t_departement" />
+        </EntityType>
+        <EntityType Name="ref_competence_annonce">
+          <Key>
+            <PropertyRef Name="id_competence" />
+            <PropertyRef Name="lvl_wait" />
+            <PropertyRef Name="isactually" />
+          </Key>
+          <Property Name="id_annonce" Type="Int32" />
+          <Property Name="id_competence" Type="Int32" Nullable="false" />
+          <Property Name="lvl_wait" Type="Int32" Nullable="false" />
+          <Property Name="isactually" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="t_annonce" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce" FromRole="ref_competence_annonce" ToRole="t_annonce" />
+          <NavigationProperty Name="t_competence" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce_0" FromRole="ref_competence_annonce" ToRole="t_competence" />
+        </EntityType>
+        <EntityType Name="ref_competence_group">
+          <Key>
+            <PropertyRef Name="id_competence" />
+            <PropertyRef Name="id_group" />
+            <PropertyRef Name="is_actually" />
+          </Key>
+          <Property Name="id_competence" Type="Int32" Nullable="false" />
+          <Property Name="id_group" Type="Int32" Nullable="false" />
+          <Property Name="is_actually" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="t_competence" Relationship="Self.ref_competence_group_fk_ref_competence_group" FromRole="ref_competence_group" ToRole="t_competence" />
+          <NavigationProperty Name="t_group" Relationship="Self.ref_competence_group_fk_ref_competence_group_0" FromRole="ref_competence_group" ToRole="t_group" />
+        </EntityType>
+        <Association Name="t_carte_bancaire_fk_t_carte_bancaire_1">
+          <End Role="ref_banque" Type="Self.ref_banque" Multiplicity="1" />
+          <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_banque">
+              <PropertyRef Name="id_banque" />
+            </Principal>
+            <Dependent Role="t_carte_bancaire">
+              <PropertyRef Name="fk_id_banque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_user_id_competence_user">
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_competence_user" Type="Self.ref_competence_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_competence">
+              <PropertyRef Name="id_competence" />
+            </Principal>
+            <Dependent Role="ref_competence_user">
+              <PropertyRef Name="id_competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_user_id_user_competence">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_competence_user" Type="Self.ref_competence_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="ref_competence_user">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ref_facturation_historique_fk_t_ref_facturation_historique">
+          <End Role="ref_status_facture" Type="Self.ref_status_facture" Multiplicity="0..1" />
+          <End Role="t_ref_facturation_historique" Type="Self.t_ref_facturation_historique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_status_facture">
+              <PropertyRef Name="id_facture" />
+            </Principal>
+            <Dependent Role="t_ref_facturation_historique">
+              <PropertyRef Name="fk_id_statut_facturation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_carte_bancaire_fk_t_carte_bancaire">
+          <End Role="ref_type_carte_bancaire" Type="Self.ref_type_carte_bancaire" Multiplicity="1" />
+          <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_type_carte_bancaire">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="t_carte_bancaire">
+              <PropertyRef Name="fk_id_typecarte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_user_adress_fk_adress_user">
+          <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_adresse">
+              <PropertyRef Name="id_adresse" />
+            </Principal>
+            <Dependent Role="ref_user_adress">
+              <PropertyRef Name="fk_adresse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_user_adress_fk_user_adress">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="ref_user_adress">
+              <PropertyRef Name="fk_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info_fk_id_adresse">
+          <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="0..1" />
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_user_adress">
+              <PropertyRef Name="id_ref_id" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="fk_id_adresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_adresse_fk_t_adresse">
+          <End Role="t_villes" Type="Self.t_villes" Multiplicity="1" />
+          <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_villes">
+              <PropertyRef Name="id_villes" />
+            </Principal>
+            <Dependent Role="t_adresse">
+              <PropertyRef Name="id_ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_annonce_fk_ref_competence_annonce">
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="0..1" />
+          <End Role="ref_competence_annonce" Type="Self.ref_competence_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_annonce">
+              <PropertyRef Name="id_annonce" />
+            </Principal>
+            <Dependent Role="ref_competence_annonce">
+              <PropertyRef Name="id_annonce" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_fk_t_annonce">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_annonce">
+              <PropertyRef Name="fk_id_useradmin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_fk_t_annonce_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="0..1" />
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_annonce">
+              <PropertyRef Name="fk_id_user_win" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_fk_t_annonce_1">
+          <End Role="t_statut_annonce" Type="Self.t_statut_annonce" Multiplicity="0..1" />
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_statut_annonce">
+              <PropertyRef Name="id_statutannonce" />
+            </Principal>
+            <Dependent Role="t_annonce">
+              <PropertyRef Name="fk_id_statutannonce" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_proposition_fk_t_annonce_proposition">
+          <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="1" />
+          <End Role="t_annonce_proposition" Type="Self.t_annonce_proposition" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="t_annonce">
+              <PropertyRef Name="id_annonce" />
+            </Principal>
+            <Dependent Role="t_annonce_proposition">
+              <PropertyRef Name="id_anno_proposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_annonce_proposition_fk_t_annonce_proposition_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_annonce_proposition" Type="Self.t_annonce_proposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_annonce_proposition">
+              <PropertyRef Name="fk_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_carte_bancaire_fk_t_carte_bancaire_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_carte_bancaire">
+              <PropertyRef Name="fk_id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_competence_fk_t_competence">
+          <End Role="t_category_competence" Type="Self.t_category_competence" Multiplicity="1" />
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_category_competence">
+              <PropertyRef Name="id_category_comp" />
+            </Principal>
+            <Dependent Role="t_competence">
+              <PropertyRef Name="fk_id_category_com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_annonce_fk_ref_competence_annonce_0">
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="1" />
+          <End Role="ref_competence_annonce" Type="Self.ref_competence_annonce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_competence">
+              <PropertyRef Name="id_competence" />
+            </Principal>
+            <Dependent Role="ref_competence_annonce">
+              <PropertyRef Name="id_competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_group_fk_ref_competence_group">
+          <End Role="t_competence" Type="Self.t_competence" Multiplicity="1" />
+          <End Role="ref_competence_group" Type="Self.ref_competence_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_competence">
+              <PropertyRef Name="id_competence" />
+            </Principal>
+            <Dependent Role="ref_competence_group">
+              <PropertyRef Name="id_competence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_departement_fk_t_departement">
+          <End Role="t_regions" Type="Self.t_regions" Multiplicity="0..1" />
+          <End Role="t_departement" Type="Self.t_departement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_regions">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="t_departement">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_villes_fk_t_villes">
+          <End Role="t_departement" Type="Self.t_departement" Multiplicity="0..1" />
+          <End Role="t_villes" Type="Self.t_villes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_departement">
+              <PropertyRef Name="id_departement" />
+            </Principal>
+            <Dependent Role="t_villes">
+              <PropertyRef Name="id_departement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_competence_group_fk_ref_competence_group_0">
+          <End Role="t_group" Type="Self.t_group" Multiplicity="1" />
+          <End Role="ref_competence_group" Type="Self.ref_competence_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_group">
+              <PropertyRef Name="id_group" />
+            </Principal>
+            <Dependent Role="ref_competence_group">
+              <PropertyRef Name="id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_member_group_fk_t_member_group_0">
+          <End Role="t_group" Type="Self.t_group" Multiplicity="1" />
+          <End Role="t_member_group" Type="Self.t_member_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_group">
+              <PropertyRef Name="id_group" />
+            </Principal>
+            <Dependent Role="t_member_group">
+              <PropertyRef Name="fk_id_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info_fk_id_level">
+          <End Role="t_level" Type="Self.t_level" Multiplicity="0..1" />
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_level">
+              <PropertyRef Name="id_level" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="fk_id_level" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_member_group_fk_t_member_group">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_member_group" Type="Self.t_member_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_member_group">
+              <PropertyRef Name="fk_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_regions_fk_t_region">
+          <End Role="t_pays" Type="Self.t_pays" Multiplicity="1" />
+          <End Role="t_regions" Type="Self.t_regions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_pays">
+              <PropertyRef Name="id_pays" />
+            </Principal>
+            <Dependent Role="t_regions">
+              <PropertyRef Name="id_pays" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_recompense_fk_t_recompense">
+          <End Role="t_type_user" Type="Self.t_type_user" Multiplicity="1" />
+          <End Role="t_recompense" Type="Self.t_recompense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_type_user">
+              <PropertyRef Name="id_typeuser" />
+            </Principal>
+            <Dependent Role="t_recompense">
+              <PropertyRef Name="recompense_type_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_recompense_user_fk_t_recompense_user">
+          <End Role="t_recompense" Type="Self.t_recompense" Multiplicity="0..1" />
+          <End Role="t_recompense_user" Type="Self.t_recompense_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_recompense">
+              <PropertyRef Name="id_recompense" />
+            </Principal>
+            <Dependent Role="t_recompense_user">
+              <PropertyRef Name="fk_id_recompense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_recompense_user_fk_t_recompense_user_0">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="t_recompense_user" Type="Self.t_recompense_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_recompense_user">
+              <PropertyRef Name="fk_id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info_fk_t_user_info_0">
+          <End Role="t_type_user" Type="Self.t_type_user" Multiplicity="1" />
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_type_user">
+              <PropertyRef Name="id_typeuser" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="fk_id_typeuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_user_info_fk_user_userinfo">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="t_user_info">
+              <PropertyRef Name="id_fk_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ref_facturation_historique">
+          <End Role="t_ref_facturation_historique" Type="Self.t_ref_facturation_historique" Multiplicity="*" />
+          <End Role="t_user" Type="Self.t_user" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="AuctionJobEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ref_banque" EntityType="Self.ref_banque" />
+          <EntitySet Name="ref_competence_user" EntityType="Self.ref_competence_user" />
+          <EntitySet Name="ref_status_facture" EntityType="Self.ref_status_facture" />
+          <EntitySet Name="ref_type_carte_bancaire" EntityType="Self.ref_type_carte_bancaire" />
+          <EntitySet Name="ref_user_adress" EntityType="Self.ref_user_adress" />
+          <EntitySet Name="t_adresse" EntityType="Self.t_adresse" />
+          <EntitySet Name="t_annonce" EntityType="Self.t_annonce" />
+          <EntitySet Name="t_annonce_proposition" EntityType="Self.t_annonce_proposition" />
+          <EntitySet Name="t_carte_bancaire" EntityType="Self.t_carte_bancaire" />
+          <EntitySet Name="t_category_competence" EntityType="Self.t_category_competence" />
+          <EntitySet Name="t_competence" EntityType="Self.t_competence" />
+          <EntitySet Name="t_departement" EntityType="Self.t_departement" />
+          <EntitySet Name="t_group" EntityType="Self.t_group" />
+          <EntitySet Name="t_level" EntityType="Self.t_level" />
+          <EntitySet Name="t_member_group" EntityType="Self.t_member_group" />
+          <EntitySet Name="t_pays" EntityType="Self.t_pays" />
+          <EntitySet Name="t_pins" EntityType="Self.t_pins" />
+          <EntitySet Name="t_recompense" EntityType="Self.t_recompense" />
+          <EntitySet Name="t_recompense_user" EntityType="Self.t_recompense_user" />
+          <EntitySet Name="t_ref_facturation_historique" EntityType="Self.t_ref_facturation_historique" />
+          <EntitySet Name="t_regions" EntityType="Self.t_regions" />
+          <EntitySet Name="t_statut_annonce" EntityType="Self.t_statut_annonce" />
+          <EntitySet Name="t_type_user" EntityType="Self.t_type_user" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" />
+          <EntitySet Name="t_user_info" EntityType="Self.t_user_info" />
+          <EntitySet Name="t_villes" EntityType="Self.t_villes" />
+          <EntitySet Name="ref_competence_annonce" EntityType="Self.ref_competence_annonce" />
+          <EntitySet Name="ref_competence_group" EntityType="Self.ref_competence_group" />
+          <AssociationSet Name="t_carte_bancaire_fk_t_carte_bancaire_1" Association="Self.t_carte_bancaire_fk_t_carte_bancaire_1">
+            <End Role="ref_banque" EntitySet="ref_banque" />
+            <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_user_id_competence_user" Association="Self.ref_competence_user_id_competence_user">
+            <End Role="t_competence" EntitySet="t_competence" />
+            <End Role="ref_competence_user" EntitySet="ref_competence_user" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_user_id_user_competence" Association="Self.ref_competence_user_id_user_competence">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="ref_competence_user" EntitySet="ref_competence_user" />
+          </AssociationSet>
+          <AssociationSet Name="t_ref_facturation_historique_fk_t_ref_facturation_historique" Association="Self.t_ref_facturation_historique_fk_t_ref_facturation_historique">
+            <End Role="ref_status_facture" EntitySet="ref_status_facture" />
+            <End Role="t_ref_facturation_historique" EntitySet="t_ref_facturation_historique" />
+          </AssociationSet>
+          <AssociationSet Name="t_carte_bancaire_fk_t_carte_bancaire" Association="Self.t_carte_bancaire_fk_t_carte_bancaire">
+            <End Role="ref_type_carte_bancaire" EntitySet="ref_type_carte_bancaire" />
+            <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+          </AssociationSet>
+          <AssociationSet Name="ref_user_adress_fk_adress_user" Association="Self.ref_user_adress_fk_adress_user">
+            <End Role="t_adresse" EntitySet="t_adresse" />
+            <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+          </AssociationSet>
+          <AssociationSet Name="ref_user_adress_fk_user_adress" Association="Self.ref_user_adress_fk_user_adress">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info_fk_id_adresse" Association="Self.t_user_info_fk_id_adresse">
+            <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_adresse_fk_t_adresse" Association="Self.t_adresse_fk_t_adresse">
+            <End Role="t_villes" EntitySet="t_villes" />
+            <End Role="t_adresse" EntitySet="t_adresse" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_annonce_fk_ref_competence_annonce" Association="Self.ref_competence_annonce_fk_ref_competence_annonce">
+            <End Role="t_annonce" EntitySet="t_annonce" />
+            <End Role="ref_competence_annonce" EntitySet="ref_competence_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_fk_t_annonce" Association="Self.t_annonce_fk_t_annonce">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_annonce" EntitySet="t_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_fk_t_annonce_0" Association="Self.t_annonce_fk_t_annonce_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_annonce" EntitySet="t_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_fk_t_annonce_1" Association="Self.t_annonce_fk_t_annonce_1">
+            <End Role="t_statut_annonce" EntitySet="t_statut_annonce" />
+            <End Role="t_annonce" EntitySet="t_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_proposition_fk_t_annonce_proposition" Association="Self.t_annonce_proposition_fk_t_annonce_proposition">
+            <End Role="t_annonce" EntitySet="t_annonce" />
+            <End Role="t_annonce_proposition" EntitySet="t_annonce_proposition" />
+          </AssociationSet>
+          <AssociationSet Name="t_annonce_proposition_fk_t_annonce_proposition_0" Association="Self.t_annonce_proposition_fk_t_annonce_proposition_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_annonce_proposition" EntitySet="t_annonce_proposition" />
+          </AssociationSet>
+          <AssociationSet Name="t_carte_bancaire_fk_t_carte_bancaire_0" Association="Self.t_carte_bancaire_fk_t_carte_bancaire_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+          </AssociationSet>
+          <AssociationSet Name="t_competence_fk_t_competence" Association="Self.t_competence_fk_t_competence">
+            <End Role="t_category_competence" EntitySet="t_category_competence" />
+            <End Role="t_competence" EntitySet="t_competence" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_annonce_fk_ref_competence_annonce_0" Association="Self.ref_competence_annonce_fk_ref_competence_annonce_0">
+            <End Role="t_competence" EntitySet="t_competence" />
+            <End Role="ref_competence_annonce" EntitySet="ref_competence_annonce" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_group_fk_ref_competence_group" Association="Self.ref_competence_group_fk_ref_competence_group">
+            <End Role="t_competence" EntitySet="t_competence" />
+            <End Role="ref_competence_group" EntitySet="ref_competence_group" />
+          </AssociationSet>
+          <AssociationSet Name="t_departement_fk_t_departement" Association="Self.t_departement_fk_t_departement">
+            <End Role="t_regions" EntitySet="t_regions" />
+            <End Role="t_departement" EntitySet="t_departement" />
+          </AssociationSet>
+          <AssociationSet Name="t_villes_fk_t_villes" Association="Self.t_villes_fk_t_villes">
+            <End Role="t_departement" EntitySet="t_departement" />
+            <End Role="t_villes" EntitySet="t_villes" />
+          </AssociationSet>
+          <AssociationSet Name="ref_competence_group_fk_ref_competence_group_0" Association="Self.ref_competence_group_fk_ref_competence_group_0">
+            <End Role="t_group" EntitySet="t_group" />
+            <End Role="ref_competence_group" EntitySet="ref_competence_group" />
+          </AssociationSet>
+          <AssociationSet Name="t_member_group_fk_t_member_group_0" Association="Self.t_member_group_fk_t_member_group_0">
+            <End Role="t_group" EntitySet="t_group" />
+            <End Role="t_member_group" EntitySet="t_member_group" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info_fk_id_level" Association="Self.t_user_info_fk_id_level">
+            <End Role="t_level" EntitySet="t_level" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_member_group_fk_t_member_group" Association="Self.t_member_group_fk_t_member_group">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_member_group" EntitySet="t_member_group" />
+          </AssociationSet>
+          <AssociationSet Name="t_regions_fk_t_region" Association="Self.t_regions_fk_t_region">
+            <End Role="t_pays" EntitySet="t_pays" />
+            <End Role="t_regions" EntitySet="t_regions" />
+          </AssociationSet>
+          <AssociationSet Name="t_recompense_fk_t_recompense" Association="Self.t_recompense_fk_t_recompense">
+            <End Role="t_type_user" EntitySet="t_type_user" />
+            <End Role="t_recompense" EntitySet="t_recompense" />
+          </AssociationSet>
+          <AssociationSet Name="t_recompense_user_fk_t_recompense_user" Association="Self.t_recompense_user_fk_t_recompense_user">
+            <End Role="t_recompense" EntitySet="t_recompense" />
+            <End Role="t_recompense_user" EntitySet="t_recompense_user" />
+          </AssociationSet>
+          <AssociationSet Name="t_recompense_user_fk_t_recompense_user_0" Association="Self.t_recompense_user_fk_t_recompense_user_0">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_recompense_user" EntitySet="t_recompense_user" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info_fk_t_user_info_0" Association="Self.t_user_info_fk_t_user_info_0">
+            <End Role="t_type_user" EntitySet="t_type_user" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="t_user_info_fk_user_userinfo" Association="Self.t_user_info_fk_user_userinfo">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="t_user_info" EntitySet="t_user_info" />
+          </AssociationSet>
+          <AssociationSet Name="ref_facturation_historique" Association="Self.ref_facturation_historique">
+            <End Role="t_ref_facturation_historique" EntitySet="t_ref_facturation_historique" />
+            <End Role="t_user" EntitySet="t_user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AuctionJobModelStoreContainer" CdmEntityContainer="AuctionJobEntities">
+          <EntitySetMapping Name="ref_banque">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_banque">
+              <MappingFragment StoreEntitySet="ref_banque">
+                <ScalarProperty Name="id_banque" ColumnName="id_banque" />
+                <ScalarProperty Name="fk_id_pays" ColumnName="fk_id_pays" />
+                <ScalarProperty Name="banq_nom" ColumnName="banq_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_competence_user">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_competence_user">
+              <MappingFragment StoreEntitySet="ref_competence_user">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+                <ScalarProperty Name="lvl_competence" ColumnName="lvl_competence" />
+                <ScalarProperty Name="isactually" ColumnName="isactually" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_status_facture">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_status_facture">
+              <MappingFragment StoreEntitySet="ref_status_facture">
+                <ScalarProperty Name="id_facture" ColumnName="id_facture" />
+                <ScalarProperty Name="fact_nom" ColumnName="fact_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_type_carte_bancaire">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_type_carte_bancaire">
+              <MappingFragment StoreEntitySet="ref_type_carte_bancaire">
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="tcb_nom" ColumnName="tcb_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_user_adress">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_user_adress">
+              <MappingFragment StoreEntitySet="ref_user_adress">
+                <ScalarProperty Name="fk_user_id" ColumnName="fk_user_id" />
+                <ScalarProperty Name="fk_adresse_id" ColumnName="fk_adresse_id" />
+                <ScalarProperty Name="id_ref_id" ColumnName="id_ref_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_adresse">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_adresse">
+              <MappingFragment StoreEntitySet="t_adresse">
+                <ScalarProperty Name="id_adresse" ColumnName="id_adresse" />
+                <ScalarProperty Name="id_ville" ColumnName="id_ville" />
+                <ScalarProperty Name="adr_libelle" ColumnName="adr_libelle" />
+                <ScalarProperty Name="adr_date_modification" ColumnName="adr_date_modification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_annonce">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_annonce">
+              <MappingFragment StoreEntitySet="t_annonce">
+                <ScalarProperty Name="id_annonce" ColumnName="id_annonce" />
+                <ScalarProperty Name="fk_id_useradmin" ColumnName="fk_id_useradmin" />
+                <ScalarProperty Name="fk_id_user_win" ColumnName="fk_id_user_win" />
+                <ScalarProperty Name="fk_id_statutannonce" ColumnName="fk_id_statutannonce" />
+                <ScalarProperty Name="fk_id_category" ColumnName="fk_id_category" />
+                <ScalarProperty Name="fk_id_adresse" ColumnName="fk_id_adresse" />
+                <ScalarProperty Name="annonce_title" ColumnName="annonce_title" />
+                <ScalarProperty Name="annonce_subtittle" ColumnName="annonce_subtittle" />
+                <ScalarProperty Name="annonce_description_mission" ColumnName="annonce_description_mission" />
+                <ScalarProperty Name="annonce_prix" ColumnName="annonce_prix" />
+                <ScalarProperty Name="annonce_validate" ColumnName="annonce_validate" />
+                <ScalarProperty Name="annonce_start" ColumnName="annonce_start" />
+                <ScalarProperty Name="annonce_deadline" ColumnName="annonce_deadline" />
+                <ScalarProperty Name="annonce_modification" ColumnName="annonce_modification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_annonce_proposition">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_annonce_proposition">
+              <MappingFragment StoreEntitySet="t_annonce_proposition">
+                <ScalarProperty Name="id_anno_proposition" ColumnName="id_anno_proposition" />
+                <ScalarProperty Name="fk_id_user" ColumnName="fk_id_user" />
+                <ScalarProperty Name="fk_id_annonce" ColumnName="fk_id_annonce" />
+                <ScalarProperty Name="annopro_description" ColumnName="annopro_description" />
+                <ScalarProperty Name="annopro_prix" ColumnName="annopro_prix" />
+                <ScalarProperty Name="annopro_create" ColumnName="annopro_create" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_carte_bancaire">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_carte_bancaire">
+              <MappingFragment StoreEntitySet="t_carte_bancaire">
+                <ScalarProperty Name="id_carte_bancaire" ColumnName="id_carte_bancaire" />
+                <ScalarProperty Name="fk_id_typecarte" ColumnName="fk_id_typecarte" />
+                <ScalarProperty Name="fk_id_utilisateur" ColumnName="fk_id_utilisateur" />
+                <ScalarProperty Name="fk_id_banque" ColumnName="fk_id_banque" />
+                <ScalarProperty Name="cb_date_expiration" ColumnName="cb_date_expiration" />
+                <ScalarProperty Name="cb_nom" ColumnName="cb_nom" />
+                <ScalarProperty Name="cb_prenom" ColumnName="cb_prenom" />
+                <ScalarProperty Name="cb_prix_facturation" ColumnName="cb_prix_facturation" />
+                <ScalarProperty Name="cb_crypto" ColumnName="cb_crypto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_category_competence">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_category_competence">
+              <MappingFragment StoreEntitySet="t_category_competence">
+                <ScalarProperty Name="id_category_comp" ColumnName="id_category_comp" />
+                <ScalarProperty Name="category_comp_nom" ColumnName="category_comp_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_competence">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_competence">
+              <MappingFragment StoreEntitySet="t_competence">
+                <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+                <ScalarProperty Name="fk_id_category_com" ColumnName="fk_id_category_com" />
+                <ScalarProperty Name="competence_nom" ColumnName="competence_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_departement">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_departement">
+              <MappingFragment StoreEntitySet="t_departement">
+                <ScalarProperty Name="id_departement" ColumnName="id_departement" />
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+                <ScalarProperty Name="departement_code" ColumnName="departement_code" />
+                <ScalarProperty Name="departement_nom" ColumnName="departement_nom" />
+                <ScalarProperty Name="departement_nom_uppercase" ColumnName="departement_nom_uppercase" />
+                <ScalarProperty Name="departement_slug" ColumnName="departement_slug" />
+                <ScalarProperty Name="departement_nom_soundex" ColumnName="departement_nom_soundex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_group">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_group">
+              <MappingFragment StoreEntitySet="t_group">
+                <ScalarProperty Name="id_group" ColumnName="id_group" />
+                <ScalarProperty Name="fk_id_user_admin" ColumnName="fk_id_user_admin" />
+                <ScalarProperty Name="group_nom" ColumnName="group_nom" />
+                <ScalarProperty Name="group_description" ColumnName="group_description" />
+                <ScalarProperty Name="group_create" ColumnName="group_create" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_level">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_level">
+              <MappingFragment StoreEntitySet="t_level">
+                <ScalarProperty Name="id_level" ColumnName="id_level" />
+                <ScalarProperty Name="level_xp_up" ColumnName="level_xp_up" />
+                <ScalarProperty Name="level_Rank" ColumnName="level_Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_member_group">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_member_group">
+              <MappingFragment StoreEntitySet="t_member_group">
+                <ScalarProperty Name="id_member" ColumnName="id_member" />
+                <ScalarProperty Name="fk_id_user" ColumnName="fk_id_user" />
+                <ScalarProperty Name="fk_id_group" ColumnName="fk_id_group" />
+                <ScalarProperty Name="member_group_isenable" ColumnName="member_group_isenable" />
+                <ScalarProperty Name="member_group_date" ColumnName="member_group_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_pays">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_pays">
+              <MappingFragment StoreEntitySet="t_pays">
+                <ScalarProperty Name="id_pays" ColumnName="id_pays" />
+                <ScalarProperty Name="pays_code" ColumnName="pays_code" />
+                <ScalarProperty Name="pays_alpha2" ColumnName="pays_alpha2" />
+                <ScalarProperty Name="pays_alpha3" ColumnName="pays_alpha3" />
+                <ScalarProperty Name="pays_nom_fr_fr" ColumnName="pays_nom_fr_fr" />
+                <ScalarProperty Name="pays_nom_en_gb" ColumnName="pays_nom_en_gb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_pins">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_pins">
+              <MappingFragment StoreEntitySet="t_pins">
+                <ScalarProperty Name="id_pins" ColumnName="id_pins" />
+                <ScalarProperty Name="fk_id_type_user" ColumnName="fk_id_type_user" />
+                <ScalarProperty Name="pins_title" ColumnName="pins_title" />
+                <ScalarProperty Name="pins_subtitle" ColumnName="pins_subtitle" />
+                <ScalarProperty Name="pins_description" ColumnName="pins_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_recompense">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_recompense">
+              <MappingFragment StoreEntitySet="t_recompense">
+                <ScalarProperty Name="id_recompense" ColumnName="id_recompense" />
+                <ScalarProperty Name="recompense_nom" ColumnName="recompense_nom" />
+                <ScalarProperty Name="recompense_description" ColumnName="recompense_description" />
+                <ScalarProperty Name="recompense_credit" ColumnName="recompense_credit" />
+                <ScalarProperty Name="recompense_xp" ColumnName="recompense_xp" />
+                <ScalarProperty Name="recompense_type_user" ColumnName="recompense_type_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_recompense_user">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_recompense_user">
+              <MappingFragment StoreEntitySet="t_recompense_user">
+                <ScalarProperty Name="id_recompense_user" ColumnName="id_recompense_user" />
+                <ScalarProperty Name="fk_id_user" ColumnName="fk_id_user" />
+                <ScalarProperty Name="fk_id_recompense" ColumnName="fk_id_recompense" />
+                <ScalarProperty Name="date_obtention" ColumnName="date_obtention" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_ref_facturation_historique">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_ref_facturation_historique">
+              <MappingFragment StoreEntitySet="t_ref_facturation_historique">
+                <ScalarProperty Name="id_facturation" ColumnName="id_facturation" />
+                <ScalarProperty Name="fk_id_statut_facturation" ColumnName="fk_id_statut_facturation" />
+                <ScalarProperty Name="date_modification" ColumnName="date_modification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_regions">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_regions">
+              <MappingFragment StoreEntitySet="t_regions">
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+                <ScalarProperty Name="id_pays" ColumnName="id_pays" />
+                <ScalarProperty Name="region_nom" ColumnName="region_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_statut_annonce">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_statut_annonce">
+              <MappingFragment StoreEntitySet="t_statut_annonce">
+                <ScalarProperty Name="id_statutannonce" ColumnName="id_statutannonce" />
+                <ScalarProperty Name="statutannonce_nom" ColumnName="statutannonce_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_type_user">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_type_user">
+              <MappingFragment StoreEntitySet="t_type_user">
+                <ScalarProperty Name="id_typeuser" ColumnName="id_typeuser" />
+                <ScalarProperty Name="typeuser_nom" ColumnName="typeuser_nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_user">
+              <MappingFragment StoreEntitySet="t_user">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="user_nom" ColumnName="user_nom" />
+                <ScalarProperty Name="user_prenom" ColumnName="user_prenom" />
+                <ScalarProperty Name="user_mail" ColumnName="user_mail" />
+                <ScalarProperty Name="user_mdp" ColumnName="user_mdp" />
+                <ScalarProperty Name="user_datenaissance" ColumnName="user_datenaissance" />
+                <ScalarProperty Name="user_isactif" ColumnName="user_isactif" />
+                <ScalarProperty Name="user_ip" ColumnName="user_ip" />
+                <ScalarProperty Name="user_create" ColumnName="user_create" />
+                <ScalarProperty Name="user_modif" ColumnName="user_modif" />
+                <ScalarProperty Name="user_last_connexion" ColumnName="user_last_connexion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user_info">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_user_info">
+              <MappingFragment StoreEntitySet="t_user_info">
+                <ScalarProperty Name="id_fk_user" ColumnName="id_fk_user" />
+                <ScalarProperty Name="fk_id_typeuser" ColumnName="fk_id_typeuser" />
+                <ScalarProperty Name="fk_id_adresse" ColumnName="fk_id_adresse" />
+                <ScalarProperty Name="fk_id_level" ColumnName="fk_id_level" />
+                <ScalarProperty Name="userinfo_exp" ColumnName="userinfo_exp" />
+                <ScalarProperty Name="userinfo_image" ColumnName="userinfo_image" />
+                <ScalarProperty Name="userinfo_date_modfif" ColumnName="userinfo_date_modfif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_villes">
+            <EntityTypeMapping TypeName="AuctionJobModel.t_villes">
+              <MappingFragment StoreEntitySet="t_villes">
+                <ScalarProperty Name="id_villes" ColumnName="id_villes" />
+                <ScalarProperty Name="id_departement" ColumnName="id_departement" />
+                <ScalarProperty Name="ville_slug" ColumnName="ville_slug" />
+                <ScalarProperty Name="ville_nom" ColumnName="ville_nom" />
+                <ScalarProperty Name="ville_nom_simple" ColumnName="ville_nom_simple" />
+                <ScalarProperty Name="ville_nom_reel" ColumnName="ville_nom_reel" />
+                <ScalarProperty Name="ville_nom_soundex" ColumnName="ville_nom_soundex" />
+                <ScalarProperty Name="ville_nom_metaphone" ColumnName="ville_nom_metaphone" />
+                <ScalarProperty Name="ville_code_postal" ColumnName="ville_code_postal" />
+                <ScalarProperty Name="ville_commune" ColumnName="ville_commune" />
+                <ScalarProperty Name="ville_code_commune" ColumnName="ville_code_commune" />
+                <ScalarProperty Name="ville_arrondissement" ColumnName="ville_arrondissement" />
+                <ScalarProperty Name="ville_canton" ColumnName="ville_canton" />
+                <ScalarProperty Name="ville_amdi" ColumnName="ville_amdi" />
+                <ScalarProperty Name="ville_longitude_deg" ColumnName="ville_longitude_deg" />
+                <ScalarProperty Name="ville_latitude_deg" ColumnName="ville_latitude_deg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_competence_annonce">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_competence_annonce">
+              <MappingFragment StoreEntitySet="ref_competence_annonce">
+                <ScalarProperty Name="id_annonce" ColumnName="id_annonce" />
+                <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+                <ScalarProperty Name="lvl_wait" ColumnName="lvl_wait" />
+                <ScalarProperty Name="isactually" ColumnName="isactually" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_competence_group">
+            <EntityTypeMapping TypeName="AuctionJobModel.ref_competence_group">
+              <MappingFragment StoreEntitySet="ref_competence_group">
+                <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+                <ScalarProperty Name="id_group" ColumnName="id_group" />
+                <ScalarProperty Name="is_actually" ColumnName="is_actually" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ref_facturation_historique" TypeName="AuctionJobModel.ref_facturation_historique" StoreEntitySet="ref_facturation_historique">
+            <EndProperty Name="t_ref_facturation_historique">
+              <ScalarProperty Name="id_facturation" ColumnName="fk_id_facturation" />
+            </EndProperty>
+            <EndProperty Name="t_user">
+              <ScalarProperty Name="id_user" ColumnName="fk_id_utilisateur" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
