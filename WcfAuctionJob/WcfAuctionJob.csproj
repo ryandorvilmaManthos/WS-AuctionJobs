@@ -67,123 +67,155 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataTransfertObject\AJModel.Context.tt">
+    <Content Include="model\ModelAJ.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AJModel.edmx</DependentUpon>
-      <LastGenOutput>AJModel.Context.cs</LastGenOutput>
+      <DependentUpon>ModelAJ.edmx</DependentUpon>
+      <LastGenOutput>ModelAJ.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataTransfertObject\AJModel.tt">
+    <Content Include="model\ModelAJ.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AJModel.edmx</DependentUpon>
-      <LastGenOutput>AJModel.cs</LastGenOutput>
+      <DependentUpon>ModelAJ.edmx</DependentUpon>
+      <LastGenOutput>ModelAJ.cs</LastGenOutput>
     </Content>
-    <Content Include="Service1.svc" />
-    <Content Include="Web.config" />
+    <Content Include="ServiceAJ.svc" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransfertObject\AJModel.Context.cs">
+    <Compile Include="DataTransfertObject\DtoRefBank.cs" />
+    <Compile Include="DataTransfertObject\DtoManager.cs" />
+    <Compile Include="DataTransfertObject\DtoRefCompetenceAnnonce.cs" />
+    <Compile Include="DataTransfertObject\DtoRefCompetenceGroup.cs" />
+    <Compile Include="DataTransfertObject\DtoRefCompetenceUser.cs" />
+    <Compile Include="DataTransfertObject\DtoRefStatusFacture.cs" />
+    <Compile Include="DataTransfertObject\DtoRefTypeCarteBancaire.cs" />
+    <Compile Include="DataTransfertObject\DtoRefUserAdress.cs" />
+    <Compile Include="DataTransfertObject\DtoTAdresse.cs" />
+    <Compile Include="DataTransfertObject\DtoTAnnonce.cs" />
+    <Compile Include="DataTransfertObject\DtoTAnnonceProposition.cs" />
+    <Compile Include="DataTransfertObject\DtoTCarteBancaire.cs" />
+    <Compile Include="DataTransfertObject\DtoTCategoryCompetence.cs" />
+    <Compile Include="DataTransfertObject\DtoTCompetence.cs" />
+    <Compile Include="DataTransfertObject\DtoTDepartement.cs" />
+    <Compile Include="DataTransfertObject\DtoTGroup.cs" />
+    <Compile Include="DataTransfertObject\DtoTLevel.cs" />
+    <Compile Include="DataTransfertObject\DtoTMemberGroup.cs" />
+    <Compile Include="DataTransfertObject\DtoTPays.cs" />
+    <Compile Include="DataTransfertObject\DtoTPins.cs" />
+    <Compile Include="DataTransfertObject\DtoTRecompense.cs" />
+    <Compile Include="DataTransfertObject\DtoTRecompenseUser.cs" />
+    <Compile Include="DataTransfertObject\DtoTRefFacturationHistorique.cs" />
+    <Compile Include="DataTransfertObject\DtoTRegions.cs" />
+    <Compile Include="DataTransfertObject\DtoTStatutAnnonce.cs" />
+    <Compile Include="DataTransfertObject\DtoTTypeUser.cs" />
+    <Compile Include="DataTransfertObject\DtoTUser.cs" />
+    <Compile Include="DataTransfertObject\DtoTUserInfo.cs" />
+    <Compile Include="DataTransfertObject\DtoTVilles.cs" />
+    <Compile Include="ExtensionsClass\Extensions.cs" />
+    <Compile Include="model\ModelAJ.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AJModel.Context.tt</DependentUpon>
+      <DependentUpon>ModelAJ.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\AJModel.cs">
+    <Compile Include="model\ModelAJ.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AJModel.tt</DependentUpon>
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\AJModel.Designer.cs">
+    <Compile Include="model\ModelAJ.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AJModel.edmx</DependentUpon>
+      <DependentUpon>ModelAJ.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_banque.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_banque.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_competence_annonce.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_competence_annonce.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_competence_group.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_competence_group.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_competence_user.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_competence_user.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_status_facture.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_status_facture.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_type_carte_bancaire.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_type_carte_bancaire.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\ref_user_adress.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\ref_user_adress.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_adresse.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_adresse.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_annonce.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_annonce.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_annonce_proposition.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_annonce_proposition.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_carte_bancaire.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_carte_bancaire.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_category_competence.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_category_competence.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_competence.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_competence.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_departement.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_departement.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_group.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_group.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_level.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_level.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_member_group.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_member_group.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_pays.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_pays.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_pins.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_pins.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_recompense.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_recompense.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_recompense_user.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_recompense_user.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_ref_facturation_historique.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_ref_facturation_historique.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_regions.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_regions.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_statut_annonce.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_statut_annonce.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_type_user.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_type_user.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_user.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_user.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_user_info.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_user_info.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTransfertObject\t_villes.cs">
-      <DependentUpon>AJModel.tt</DependentUpon>
+    <Compile Include="model\t_villes.cs">
+      <DependentUpon>ModelAJ.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="ServiceAJ.svc.cs">
+      <DependentUpon>ServiceAJ.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="IServiceAJ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,12 +223,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="DataTransfertObject\AJModel.edmx">
+    <EntityDeploy Include="model\ModelAJ.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AJModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelAJ.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DataTransfertObject\AJModel.edmx.diagram">
-      <DependentUpon>AJModel.edmx</DependentUpon>
+    <Content Include="model\ModelAJ.edmx.diagram">
+      <DependentUpon>ModelAJ.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
