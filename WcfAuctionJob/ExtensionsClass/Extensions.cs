@@ -42,6 +42,8 @@ namespace WcfAuctionJob.ExtensionsClass
 
                 //Test if class implements IDictionnary
                 object resultObject;
+
+                
                 if (typeof(IDictionary).IsAssignableFrom(typeOutput))
                 {
                     // Get all value of Dictionnary property
@@ -65,27 +67,36 @@ namespace WcfAuctionJob.ExtensionsClass
                 else
                 {
                     //Test if class implements ICollection
-                    if (typeof(ICollection<>).IsAssignableFrom(typeOutput)|| typeof(ICollection).IsAssignableFrom(typeOutput))
+                    if (typeof (ICollection).IsAssignableFrom(typeOutput))
                     {
                         //Get all value of Collection property
                         object inputList = inputType.GetProperty(memberInfo.Name).GetValue(input, null);
 
                         //Call extension method "ConvertAll" to convert
                         object convertResult = CallConvertAll(typeInput.GenericTypeArguments.First(),
-                            typeOutput.GenericTypeArguments.First(), new [] { inputList });
+                            typeOutput.GenericTypeArguments.First(), new[] {inputList});
 
                         //new generic list
-                        Type genericType = typeof(List<>).MakeGenericType(typeOutput.GenericTypeArguments.First());
+                        Type genericType = typeof (List<>).MakeGenericType(typeOutput.GenericTypeArguments.First());
                         resultObject = Activator.CreateInstance(genericType, convertResult);
                     }
-                    else
+                    else 
                     {
-                        //Get input value
-                        resultObject = inputProperty.GetValue(input, null);
+                        if (typeInput == typeof(HashSet<T>))
+                        {
+                            Console.WriteLine("test");
+                            resultObject = null;
+                        }
+                        else
+                        {
+                            //Get input value
+                            resultObject = inputProperty.GetValue(input, null);
+
+                        }
                     }
+                    
                 }
                 //Set output value
-                var test = 0;
                 outputProperty.SetValue(outputObject, resultObject, null);
             }
             return (T)outputObject;

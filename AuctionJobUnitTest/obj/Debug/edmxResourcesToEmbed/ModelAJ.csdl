@@ -1,0 +1,901 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="auctionjobModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ref_banque">
+    <Key>
+      <PropertyRef Name="id_banque" />
+    </Key>
+    <Property Name="id_banque" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_pays" Type="Int32" Nullable="false" />
+    <Property Name="banq_nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_1" FromRole="ref_banque" ToRole="t_carte_bancaire" />
+  </EntityType>
+  <EntityType Name="ref_competence_user">
+    <Key>
+      <PropertyRef Name="id_user" />
+      <PropertyRef Name="id_competence" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" />
+    <Property Name="id_competence" Type="Int32" Nullable="false" />
+    <Property Name="lvl_competence" Type="Int32" Nullable="false" />
+    <Property Name="isactually" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="t_competence" Relationship="Self.ref_competence_user_id_competence_user" FromRole="ref_competence_user" ToRole="t_competence" />
+    <NavigationProperty Name="t_user" Relationship="Self.ref_competence_user_id_user_competence" FromRole="ref_competence_user" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="ref_status_facture">
+    <Key>
+      <PropertyRef Name="id_facture" />
+    </Key>
+    <Property Name="id_facture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fact_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_ref_facturation_historique" Relationship="Self.t_ref_facturation_historique_fk_t_ref_facturation_historique" FromRole="ref_status_facture" ToRole="t_ref_facturation_historique" />
+  </EntityType>
+  <EntityType Name="ref_type_carte_bancaire">
+    <Key>
+      <PropertyRef Name="id_type" />
+    </Key>
+    <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tcb_nom" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire" FromRole="ref_type_carte_bancaire" ToRole="t_carte_bancaire" />
+  </EntityType>
+  <EntityType Name="ref_user_adress">
+    <Key>
+      <PropertyRef Name="id_ref_id" />
+    </Key>
+    <Property Name="fk_user_id" Type="Int32" Nullable="false" />
+    <Property Name="fk_adresse_id" Type="Int32" Nullable="false" />
+    <Property Name="id_ref_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="t_adresse" Relationship="Self.ref_user_adress_fk_adress_user" FromRole="ref_user_adress" ToRole="t_adresse" />
+    <NavigationProperty Name="t_user" Relationship="Self.ref_user_adress_fk_user_adress" FromRole="ref_user_adress" ToRole="t_user" />
+    <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_id_adresse" FromRole="ref_user_adress" ToRole="t_user_info" />
+  </EntityType>
+  <EntityType Name="t_adresse">
+    <Key>
+      <PropertyRef Name="id_adresse" />
+    </Key>
+    <Property Name="id_adresse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_ville" Type="Int32" Nullable="false" />
+    <Property Name="adr_libelle" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="adr_date_modification" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ref_user_adress" Relationship="Self.ref_user_adress_fk_adress_user" FromRole="t_adresse" ToRole="ref_user_adress" />
+    <NavigationProperty Name="t_villes" Relationship="Self.t_adresse_fk_t_adresse" FromRole="t_adresse" ToRole="t_villes" />
+  </EntityType>
+  <EntityType Name="t_annonce">
+    <Key>
+      <PropertyRef Name="id_annonce" />
+    </Key>
+    <Property Name="id_annonce" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_useradmin" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_user_win" Type="Int32" />
+    <Property Name="fk_id_statutannonce" Type="Int32" />
+    <Property Name="fk_id_category" Type="Double" />
+    <Property Name="fk_id_adresse" Type="Double" Nullable="false" />
+    <Property Name="annonce_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="annonce_subtittle" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="annonce_description_mission" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="annonce_prix" Type="Double" Nullable="false" />
+    <Property Name="annonce_validate" Type="Int16" Nullable="false" />
+    <Property Name="annonce_start" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="annonce_deadline" Type="DateTime" Precision="3" />
+    <Property Name="annonce_modification" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ref_competence_annonce" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce" FromRole="t_annonce" ToRole="ref_competence_annonce" />
+    <NavigationProperty Name="t_user" Relationship="Self.t_annonce_fk_t_annonce" FromRole="t_annonce" ToRole="t_user" />
+    <NavigationProperty Name="t_user1" Relationship="Self.t_annonce_fk_t_annonce_0" FromRole="t_annonce" ToRole="t_user" />
+    <NavigationProperty Name="t_statut_annonce" Relationship="Self.t_annonce_fk_t_annonce_1" FromRole="t_annonce" ToRole="t_statut_annonce" />
+    <NavigationProperty Name="t_annonce_proposition" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition" FromRole="t_annonce" ToRole="t_annonce_proposition" />
+  </EntityType>
+  <EntityType Name="t_annonce_proposition">
+    <Key>
+      <PropertyRef Name="id_anno_proposition" />
+    </Key>
+    <Property Name="id_anno_proposition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_user" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_annonce" Type="Int32" Nullable="false" />
+    <Property Name="annopro_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="annopro_prix" Type="Double" Nullable="false" />
+    <Property Name="annopro_create" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="t_annonce" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition" FromRole="t_annonce_proposition" ToRole="t_annonce" />
+    <NavigationProperty Name="t_user" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition_0" FromRole="t_annonce_proposition" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="t_carte_bancaire">
+    <Key>
+      <PropertyRef Name="id_carte_bancaire" />
+    </Key>
+    <Property Name="id_carte_bancaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_typecarte" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_utilisateur" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_banque" Type="Int32" Nullable="false" />
+    <Property Name="cb_date_expiration" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="cb_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cb_prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cb_prix_facturation" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="cb_crypto" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="ref_banque" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_1" FromRole="t_carte_bancaire" ToRole="ref_banque" />
+    <NavigationProperty Name="ref_type_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire" FromRole="t_carte_bancaire" ToRole="ref_type_carte_bancaire" />
+    <NavigationProperty Name="t_user" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_0" FromRole="t_carte_bancaire" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="t_category_competence">
+    <Key>
+      <PropertyRef Name="id_category_comp" />
+    </Key>
+    <Property Name="id_category_comp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_comp_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_competence" Relationship="Self.t_competence_fk_t_competence" FromRole="t_category_competence" ToRole="t_competence" />
+  </EntityType>
+  <EntityType Name="t_competence">
+    <Key>
+      <PropertyRef Name="id_competence" />
+    </Key>
+    <Property Name="id_competence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_category_com" Type="Int32" Nullable="false" />
+    <Property Name="competence_nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ref_competence_user" Relationship="Self.ref_competence_user_id_competence_user" FromRole="t_competence" ToRole="ref_competence_user" />
+    <NavigationProperty Name="t_category_competence" Relationship="Self.t_competence_fk_t_competence" FromRole="t_competence" ToRole="t_category_competence" />
+    <NavigationProperty Name="ref_competence_annonce" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce_0" FromRole="t_competence" ToRole="ref_competence_annonce" />
+    <NavigationProperty Name="ref_competence_group" Relationship="Self.ref_competence_group_fk_ref_competence_group" FromRole="t_competence" ToRole="ref_competence_group" />
+  </EntityType>
+  <EntityType Name="t_departement">
+    <Key>
+      <PropertyRef Name="id_departement" />
+    </Key>
+    <Property Name="id_departement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_region" Type="Int32" />
+    <Property Name="departement_code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="departement_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="departement_nom_uppercase" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="departement_slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="departement_nom_soundex" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="t_regions" Relationship="Self.t_departement_fk_t_departement" FromRole="t_departement" ToRole="t_regions" />
+    <NavigationProperty Name="t_villes" Relationship="Self.t_villes_fk_t_villes" FromRole="t_departement" ToRole="t_villes" />
+  </EntityType>
+  <EntityType Name="t_group">
+    <Key>
+      <PropertyRef Name="id_group" />
+    </Key>
+    <Property Name="id_group" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_user_admin" Type="Int32" Nullable="false" />
+    <Property Name="group_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="group_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="group_create" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ref_competence_group" Relationship="Self.ref_competence_group_fk_ref_competence_group_0" FromRole="t_group" ToRole="ref_competence_group" />
+    <NavigationProperty Name="t_member_group" Relationship="Self.t_member_group_fk_t_member_group_0" FromRole="t_group" ToRole="t_member_group" />
+  </EntityType>
+  <EntityType Name="t_level">
+    <Key>
+      <PropertyRef Name="id_level" />
+    </Key>
+    <Property Name="id_level" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="level_xp_up" Type="Double" Nullable="false" />
+    <Property Name="level_Rank" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_id_level" FromRole="t_level" ToRole="t_user_info" />
+  </EntityType>
+  <EntityType Name="t_member_group">
+    <Key>
+      <PropertyRef Name="id_member" />
+    </Key>
+    <Property Name="id_member" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_user" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_group" Type="Int32" Nullable="false" />
+    <Property Name="member_group_isenable" Type="Int16" Nullable="false" />
+    <Property Name="member_group_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="t_group" Relationship="Self.t_member_group_fk_t_member_group_0" FromRole="t_member_group" ToRole="t_group" />
+    <NavigationProperty Name="t_user" Relationship="Self.t_member_group_fk_t_member_group" FromRole="t_member_group" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="t_pays">
+    <Key>
+      <PropertyRef Name="id_pays" />
+    </Key>
+    <Property Name="id_pays" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pays_code" Type="Int16" />
+    <Property Name="pays_alpha2" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="pays_alpha3" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="pays_nom_fr_fr" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pays_nom_en_gb" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="t_regions" Relationship="Self.t_regions_fk_t_region" FromRole="t_pays" ToRole="t_regions" />
+  </EntityType>
+  <EntityType Name="t_pins">
+    <Key>
+      <PropertyRef Name="id_pins" />
+    </Key>
+    <Property Name="id_pins" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_type_user" Type="Int32" Nullable="false" />
+    <Property Name="pins_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="pins_subtitle" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="pins_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_recompense">
+    <Key>
+      <PropertyRef Name="id_recompense" />
+    </Key>
+    <Property Name="id_recompense" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="recompense_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="recompense_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="recompense_credit" Type="Double" Nullable="false" />
+    <Property Name="recompense_xp" Type="Double" Nullable="false" />
+    <Property Name="recompense_type_user" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="t_type_user" Relationship="Self.t_recompense_fk_t_recompense" FromRole="t_recompense" ToRole="t_type_user" />
+    <NavigationProperty Name="t_recompense_user" Relationship="Self.t_recompense_user_fk_t_recompense_user" FromRole="t_recompense" ToRole="t_recompense_user" />
+  </EntityType>
+  <EntityType Name="t_recompense_user">
+    <Key>
+      <PropertyRef Name="id_recompense_user" />
+    </Key>
+    <Property Name="id_recompense_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fk_id_user" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_recompense" Type="Int32" />
+    <Property Name="date_obtention" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="t_recompense" Relationship="Self.t_recompense_user_fk_t_recompense_user" FromRole="t_recompense_user" ToRole="t_recompense" />
+    <NavigationProperty Name="t_user" Relationship="Self.t_recompense_user_fk_t_recompense_user_0" FromRole="t_recompense_user" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="t_ref_facturation_historique">
+    <Key>
+      <PropertyRef Name="id_facturation" />
+    </Key>
+    <Property Name="id_facturation" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_statut_facturation" Type="Int32" />
+    <Property Name="date_modification" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ref_status_facture" Relationship="Self.t_ref_facturation_historique_fk_t_ref_facturation_historique" FromRole="t_ref_facturation_historique" ToRole="ref_status_facture" />
+    <NavigationProperty Name="t_user" Relationship="Self.ref_facturation_historique" FromRole="t_ref_facturation_historique" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="t_regions">
+    <Key>
+      <PropertyRef Name="id_region" />
+    </Key>
+    <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_pays" Type="Int32" Nullable="false" />
+    <Property Name="region_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="t_departement" Relationship="Self.t_departement_fk_t_departement" FromRole="t_regions" ToRole="t_departement" />
+    <NavigationProperty Name="t_pays" Relationship="Self.t_regions_fk_t_region" FromRole="t_regions" ToRole="t_pays" />
+  </EntityType>
+  <EntityType Name="t_statut_annonce">
+    <Key>
+      <PropertyRef Name="id_statutannonce" />
+    </Key>
+    <Property Name="id_statutannonce" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="statutannonce_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_annonce" Relationship="Self.t_annonce_fk_t_annonce_1" FromRole="t_statut_annonce" ToRole="t_annonce" />
+  </EntityType>
+  <EntityType Name="t_type_user">
+    <Key>
+      <PropertyRef Name="id_typeuser" />
+    </Key>
+    <Property Name="id_typeuser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typeuser_nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="t_recompense" Relationship="Self.t_recompense_fk_t_recompense" FromRole="t_type_user" ToRole="t_recompense" />
+    <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_t_user_info_0" FromRole="t_type_user" ToRole="t_user_info" />
+  </EntityType>
+  <EntityType Name="t_user">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_prenom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_mail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_mdp" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_datenaissance" Type="DateTime" Precision="0" />
+    <Property Name="user_isactif" Type="Int16" Nullable="false" />
+    <Property Name="user_ip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_create" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_modif" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_last_connexion" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ref_competence_user" Relationship="Self.ref_competence_user_id_user_competence" FromRole="t_user" ToRole="ref_competence_user" />
+    <NavigationProperty Name="ref_user_adress" Relationship="Self.ref_user_adress_fk_user_adress" FromRole="t_user" ToRole="ref_user_adress" />
+    <NavigationProperty Name="t_annonce" Relationship="Self.t_annonce_fk_t_annonce" FromRole="t_user" ToRole="t_annonce" />
+    <NavigationProperty Name="t_annonce1" Relationship="Self.t_annonce_fk_t_annonce_0" FromRole="t_user" ToRole="t_annonce" />
+    <NavigationProperty Name="t_annonce_proposition" Relationship="Self.t_annonce_proposition_fk_t_annonce_proposition_0" FromRole="t_user" ToRole="t_annonce_proposition" />
+    <NavigationProperty Name="t_carte_bancaire" Relationship="Self.t_carte_bancaire_fk_t_carte_bancaire_0" FromRole="t_user" ToRole="t_carte_bancaire" />
+    <NavigationProperty Name="t_member_group" Relationship="Self.t_member_group_fk_t_member_group" FromRole="t_user" ToRole="t_member_group" />
+    <NavigationProperty Name="t_recompense_user" Relationship="Self.t_recompense_user_fk_t_recompense_user_0" FromRole="t_user" ToRole="t_recompense_user" />
+    <NavigationProperty Name="t_user_info" Relationship="Self.t_user_info_fk_user_userinfo" FromRole="t_user" ToRole="t_user_info" />
+    <NavigationProperty Name="t_ref_facturation_historique" Relationship="Self.ref_facturation_historique" FromRole="t_user" ToRole="t_ref_facturation_historique" />
+  </EntityType>
+  <EntityType Name="t_user_info">
+    <Key>
+      <PropertyRef Name="id_fk_user" />
+      <PropertyRef Name="fk_id_typeuser" />
+    </Key>
+    <Property Name="id_fk_user" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_typeuser" Type="Int32" Nullable="false" />
+    <Property Name="fk_id_adresse" Type="Int32" />
+    <Property Name="fk_id_level" Type="Int32" />
+    <Property Name="userinfo_exp" Type="Double" Nullable="false" />
+    <Property Name="userinfo_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="userinfo_date_modfif" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ref_user_adress" Relationship="Self.t_user_info_fk_id_adresse" FromRole="t_user_info" ToRole="ref_user_adress" />
+    <NavigationProperty Name="t_level" Relationship="Self.t_user_info_fk_id_level" FromRole="t_user_info" ToRole="t_level" />
+    <NavigationProperty Name="t_type_user" Relationship="Self.t_user_info_fk_t_user_info_0" FromRole="t_user_info" ToRole="t_type_user" />
+    <NavigationProperty Name="t_user" Relationship="Self.t_user_info_fk_user_userinfo" FromRole="t_user_info" ToRole="t_user" />
+  </EntityType>
+  <EntityType Name="t_villes">
+    <Key>
+      <PropertyRef Name="id_villes" />
+    </Key>
+    <Property Name="id_villes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_departement" Type="Int32" />
+    <Property Name="ville_slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ville_nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ville_nom_simple" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ville_nom_reel" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ville_nom_soundex" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ville_nom_metaphone" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+    <Property Name="ville_code_postal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ville_commune" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ville_code_commune" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ville_arrondissement" Type="Int16" />
+    <Property Name="ville_canton" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="ville_amdi" Type="Int16" />
+    <Property Name="ville_longitude_deg" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="ville_latitude_deg" Type="Decimal" Precision="12" Scale="0" />
+    <NavigationProperty Name="t_adresse" Relationship="Self.t_adresse_fk_t_adresse" FromRole="t_villes" ToRole="t_adresse" />
+    <NavigationProperty Name="t_departement" Relationship="Self.t_villes_fk_t_villes" FromRole="t_villes" ToRole="t_departement" />
+  </EntityType>
+  <EntityType Name="ref_competence_annonce">
+    <Key>
+      <PropertyRef Name="id_competence" />
+      <PropertyRef Name="lvl_wait" />
+      <PropertyRef Name="isactually" />
+    </Key>
+    <Property Name="id_annonce" Type="Int32" />
+    <Property Name="id_competence" Type="Int32" Nullable="false" />
+    <Property Name="lvl_wait" Type="Int32" Nullable="false" />
+    <Property Name="isactually" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="t_annonce" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce" FromRole="ref_competence_annonce" ToRole="t_annonce" />
+    <NavigationProperty Name="t_competence" Relationship="Self.ref_competence_annonce_fk_ref_competence_annonce_0" FromRole="ref_competence_annonce" ToRole="t_competence" />
+  </EntityType>
+  <EntityType Name="ref_competence_group">
+    <Key>
+      <PropertyRef Name="id_competence" />
+      <PropertyRef Name="id_group" />
+      <PropertyRef Name="is_actually" />
+    </Key>
+    <Property Name="id_competence" Type="Int32" Nullable="false" />
+    <Property Name="id_group" Type="Int32" Nullable="false" />
+    <Property Name="is_actually" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="t_competence" Relationship="Self.ref_competence_group_fk_ref_competence_group" FromRole="ref_competence_group" ToRole="t_competence" />
+    <NavigationProperty Name="t_group" Relationship="Self.ref_competence_group_fk_ref_competence_group_0" FromRole="ref_competence_group" ToRole="t_group" />
+  </EntityType>
+  <Association Name="t_carte_bancaire_fk_t_carte_bancaire_1">
+    <End Role="ref_banque" Type="Self.ref_banque" Multiplicity="1" />
+    <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ref_banque">
+        <PropertyRef Name="id_banque" />
+      </Principal>
+      <Dependent Role="t_carte_bancaire">
+        <PropertyRef Name="fk_id_banque" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_competence_user_id_competence_user">
+    <End Role="t_competence" Type="Self.t_competence" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ref_competence_user" Type="Self.ref_competence_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_competence">
+        <PropertyRef Name="id_competence" />
+      </Principal>
+      <Dependent Role="ref_competence_user">
+        <PropertyRef Name="id_competence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_competence_user_id_user_competence">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ref_competence_user" Type="Self.ref_competence_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="ref_competence_user">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_ref_facturation_historique_fk_t_ref_facturation_historique">
+    <End Role="ref_status_facture" Type="Self.ref_status_facture" Multiplicity="0..1" />
+    <End Role="t_ref_facturation_historique" Type="Self.t_ref_facturation_historique" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ref_status_facture">
+        <PropertyRef Name="id_facture" />
+      </Principal>
+      <Dependent Role="t_ref_facturation_historique">
+        <PropertyRef Name="fk_id_statut_facturation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_carte_bancaire_fk_t_carte_bancaire">
+    <End Role="ref_type_carte_bancaire" Type="Self.ref_type_carte_bancaire" Multiplicity="1" />
+    <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ref_type_carte_bancaire">
+        <PropertyRef Name="id_type" />
+      </Principal>
+      <Dependent Role="t_carte_bancaire">
+        <PropertyRef Name="fk_id_typecarte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_user_adress_fk_adress_user">
+    <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_adresse">
+        <PropertyRef Name="id_adresse" />
+      </Principal>
+      <Dependent Role="ref_user_adress">
+        <PropertyRef Name="fk_adresse_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_user_adress_fk_user_adress">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="ref_user_adress">
+        <PropertyRef Name="fk_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_user_info_fk_id_adresse">
+    <End Role="ref_user_adress" Type="Self.ref_user_adress" Multiplicity="0..1" />
+    <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ref_user_adress">
+        <PropertyRef Name="id_ref_id" />
+      </Principal>
+      <Dependent Role="t_user_info">
+        <PropertyRef Name="fk_id_adresse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_adresse_fk_t_adresse">
+    <End Role="t_villes" Type="Self.t_villes" Multiplicity="1" />
+    <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_villes">
+        <PropertyRef Name="id_villes" />
+      </Principal>
+      <Dependent Role="t_adresse">
+        <PropertyRef Name="id_ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_competence_annonce_fk_ref_competence_annonce">
+    <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="0..1" />
+    <End Role="ref_competence_annonce" Type="Self.ref_competence_annonce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_annonce">
+        <PropertyRef Name="id_annonce" />
+      </Principal>
+      <Dependent Role="ref_competence_annonce">
+        <PropertyRef Name="id_annonce" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_annonce_fk_t_annonce">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+    <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_annonce">
+        <PropertyRef Name="fk_id_useradmin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_annonce_fk_t_annonce_0">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="0..1" />
+    <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_annonce">
+        <PropertyRef Name="fk_id_user_win" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_annonce_fk_t_annonce_1">
+    <End Role="t_statut_annonce" Type="Self.t_statut_annonce" Multiplicity="0..1" />
+    <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_statut_annonce">
+        <PropertyRef Name="id_statutannonce" />
+      </Principal>
+      <Dependent Role="t_annonce">
+        <PropertyRef Name="fk_id_statutannonce" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_annonce_proposition_fk_t_annonce_proposition">
+    <End Role="t_annonce" Type="Self.t_annonce" Multiplicity="1" />
+    <End Role="t_annonce_proposition" Type="Self.t_annonce_proposition" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="t_annonce">
+        <PropertyRef Name="id_annonce" />
+      </Principal>
+      <Dependent Role="t_annonce_proposition">
+        <PropertyRef Name="id_anno_proposition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_annonce_proposition_fk_t_annonce_proposition_0">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+    <End Role="t_annonce_proposition" Type="Self.t_annonce_proposition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_annonce_proposition">
+        <PropertyRef Name="fk_id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_carte_bancaire_fk_t_carte_bancaire_0">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+    <End Role="t_carte_bancaire" Type="Self.t_carte_bancaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_carte_bancaire">
+        <PropertyRef Name="fk_id_utilisateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_competence_fk_t_competence">
+    <End Role="t_category_competence" Type="Self.t_category_competence" Multiplicity="1" />
+    <End Role="t_competence" Type="Self.t_competence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_category_competence">
+        <PropertyRef Name="id_category_comp" />
+      </Principal>
+      <Dependent Role="t_competence">
+        <PropertyRef Name="fk_id_category_com" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_competence_annonce_fk_ref_competence_annonce_0">
+    <End Role="t_competence" Type="Self.t_competence" Multiplicity="1" />
+    <End Role="ref_competence_annonce" Type="Self.ref_competence_annonce" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_competence">
+        <PropertyRef Name="id_competence" />
+      </Principal>
+      <Dependent Role="ref_competence_annonce">
+        <PropertyRef Name="id_competence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_competence_group_fk_ref_competence_group">
+    <End Role="t_competence" Type="Self.t_competence" Multiplicity="1" />
+    <End Role="ref_competence_group" Type="Self.ref_competence_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_competence">
+        <PropertyRef Name="id_competence" />
+      </Principal>
+      <Dependent Role="ref_competence_group">
+        <PropertyRef Name="id_competence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_departement_fk_t_departement">
+    <End Role="t_regions" Type="Self.t_regions" Multiplicity="0..1" />
+    <End Role="t_departement" Type="Self.t_departement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_regions">
+        <PropertyRef Name="id_region" />
+      </Principal>
+      <Dependent Role="t_departement">
+        <PropertyRef Name="id_region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_villes_fk_t_villes">
+    <End Role="t_departement" Type="Self.t_departement" Multiplicity="0..1" />
+    <End Role="t_villes" Type="Self.t_villes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_departement">
+        <PropertyRef Name="id_departement" />
+      </Principal>
+      <Dependent Role="t_villes">
+        <PropertyRef Name="id_departement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_competence_group_fk_ref_competence_group_0">
+    <End Role="t_group" Type="Self.t_group" Multiplicity="1" />
+    <End Role="ref_competence_group" Type="Self.ref_competence_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_group">
+        <PropertyRef Name="id_group" />
+      </Principal>
+      <Dependent Role="ref_competence_group">
+        <PropertyRef Name="id_group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_member_group_fk_t_member_group_0">
+    <End Role="t_group" Type="Self.t_group" Multiplicity="1" />
+    <End Role="t_member_group" Type="Self.t_member_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_group">
+        <PropertyRef Name="id_group" />
+      </Principal>
+      <Dependent Role="t_member_group">
+        <PropertyRef Name="fk_id_group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_user_info_fk_id_level">
+    <End Role="t_level" Type="Self.t_level" Multiplicity="0..1" />
+    <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_level">
+        <PropertyRef Name="id_level" />
+      </Principal>
+      <Dependent Role="t_user_info">
+        <PropertyRef Name="fk_id_level" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_member_group_fk_t_member_group">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+    <End Role="t_member_group" Type="Self.t_member_group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_member_group">
+        <PropertyRef Name="fk_id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_regions_fk_t_region">
+    <End Role="t_pays" Type="Self.t_pays" Multiplicity="1" />
+    <End Role="t_regions" Type="Self.t_regions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_pays">
+        <PropertyRef Name="id_pays" />
+      </Principal>
+      <Dependent Role="t_regions">
+        <PropertyRef Name="id_pays" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_recompense_fk_t_recompense">
+    <End Role="t_type_user" Type="Self.t_type_user" Multiplicity="1" />
+    <End Role="t_recompense" Type="Self.t_recompense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_type_user">
+        <PropertyRef Name="id_typeuser" />
+      </Principal>
+      <Dependent Role="t_recompense">
+        <PropertyRef Name="recompense_type_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_recompense_user_fk_t_recompense_user">
+    <End Role="t_recompense" Type="Self.t_recompense" Multiplicity="0..1" />
+    <End Role="t_recompense_user" Type="Self.t_recompense_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_recompense">
+        <PropertyRef Name="id_recompense" />
+      </Principal>
+      <Dependent Role="t_recompense_user">
+        <PropertyRef Name="fk_id_recompense" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_recompense_user_fk_t_recompense_user_0">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+    <End Role="t_recompense_user" Type="Self.t_recompense_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_recompense_user">
+        <PropertyRef Name="fk_id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_user_info_fk_t_user_info_0">
+    <End Role="t_type_user" Type="Self.t_type_user" Multiplicity="1" />
+    <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_type_user">
+        <PropertyRef Name="id_typeuser" />
+      </Principal>
+      <Dependent Role="t_user_info">
+        <PropertyRef Name="fk_id_typeuser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="t_user_info_fk_user_userinfo">
+    <End Role="t_user" Type="Self.t_user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="t_user_info" Type="Self.t_user_info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_user">
+        <PropertyRef Name="id_user" />
+      </Principal>
+      <Dependent Role="t_user_info">
+        <PropertyRef Name="id_fk_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ref_facturation_historique">
+    <End Role="t_ref_facturation_historique" Type="Self.t_ref_facturation_historique" Multiplicity="*" />
+    <End Role="t_user" Type="Self.t_user" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="AuctionJobEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ref_banque" EntityType="Self.ref_banque" />
+    <EntitySet Name="ref_competence_user" EntityType="Self.ref_competence_user" />
+    <EntitySet Name="ref_status_facture" EntityType="Self.ref_status_facture" />
+    <EntitySet Name="ref_type_carte_bancaire" EntityType="Self.ref_type_carte_bancaire" />
+    <EntitySet Name="ref_user_adress" EntityType="Self.ref_user_adress" />
+    <EntitySet Name="t_adresse" EntityType="Self.t_adresse" />
+    <EntitySet Name="t_annonce" EntityType="Self.t_annonce" />
+    <EntitySet Name="t_annonce_proposition" EntityType="Self.t_annonce_proposition" />
+    <EntitySet Name="t_carte_bancaire" EntityType="Self.t_carte_bancaire" />
+    <EntitySet Name="t_category_competence" EntityType="Self.t_category_competence" />
+    <EntitySet Name="t_competence" EntityType="Self.t_competence" />
+    <EntitySet Name="t_departement" EntityType="Self.t_departement" />
+    <EntitySet Name="t_group" EntityType="Self.t_group" />
+    <EntitySet Name="t_level" EntityType="Self.t_level" />
+    <EntitySet Name="t_member_group" EntityType="Self.t_member_group" />
+    <EntitySet Name="t_pays" EntityType="Self.t_pays" />
+    <EntitySet Name="t_pins" EntityType="Self.t_pins" />
+    <EntitySet Name="t_recompense" EntityType="Self.t_recompense" />
+    <EntitySet Name="t_recompense_user" EntityType="Self.t_recompense_user" />
+    <EntitySet Name="t_ref_facturation_historique" EntityType="Self.t_ref_facturation_historique" />
+    <EntitySet Name="t_regions" EntityType="Self.t_regions" />
+    <EntitySet Name="t_statut_annonce" EntityType="Self.t_statut_annonce" />
+    <EntitySet Name="t_type_user" EntityType="Self.t_type_user" />
+    <EntitySet Name="t_user" EntityType="Self.t_user" />
+    <EntitySet Name="t_user_info" EntityType="Self.t_user_info" />
+    <EntitySet Name="t_villes" EntityType="Self.t_villes" />
+    <EntitySet Name="ref_competence_annonce" EntityType="Self.ref_competence_annonce" />
+    <EntitySet Name="ref_competence_group" EntityType="Self.ref_competence_group" />
+    <AssociationSet Name="t_carte_bancaire_fk_t_carte_bancaire_1" Association="Self.t_carte_bancaire_fk_t_carte_bancaire_1">
+      <End Role="ref_banque" EntitySet="ref_banque" />
+      <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+    </AssociationSet>
+    <AssociationSet Name="ref_competence_user_id_competence_user" Association="Self.ref_competence_user_id_competence_user">
+      <End Role="t_competence" EntitySet="t_competence" />
+      <End Role="ref_competence_user" EntitySet="ref_competence_user" />
+    </AssociationSet>
+    <AssociationSet Name="ref_competence_user_id_user_competence" Association="Self.ref_competence_user_id_user_competence">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="ref_competence_user" EntitySet="ref_competence_user" />
+    </AssociationSet>
+    <AssociationSet Name="t_ref_facturation_historique_fk_t_ref_facturation_historique" Association="Self.t_ref_facturation_historique_fk_t_ref_facturation_historique">
+      <End Role="ref_status_facture" EntitySet="ref_status_facture" />
+      <End Role="t_ref_facturation_historique" EntitySet="t_ref_facturation_historique" />
+    </AssociationSet>
+    <AssociationSet Name="t_carte_bancaire_fk_t_carte_bancaire" Association="Self.t_carte_bancaire_fk_t_carte_bancaire">
+      <End Role="ref_type_carte_bancaire" EntitySet="ref_type_carte_bancaire" />
+      <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+    </AssociationSet>
+    <AssociationSet Name="ref_user_adress_fk_adress_user" Association="Self.ref_user_adress_fk_adress_user">
+      <End Role="t_adresse" EntitySet="t_adresse" />
+      <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+    </AssociationSet>
+    <AssociationSet Name="ref_user_adress_fk_user_adress" Association="Self.ref_user_adress_fk_user_adress">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+    </AssociationSet>
+    <AssociationSet Name="t_user_info_fk_id_adresse" Association="Self.t_user_info_fk_id_adresse">
+      <End Role="ref_user_adress" EntitySet="ref_user_adress" />
+      <End Role="t_user_info" EntitySet="t_user_info" />
+    </AssociationSet>
+    <AssociationSet Name="t_adresse_fk_t_adresse" Association="Self.t_adresse_fk_t_adresse">
+      <End Role="t_villes" EntitySet="t_villes" />
+      <End Role="t_adresse" EntitySet="t_adresse" />
+    </AssociationSet>
+    <AssociationSet Name="ref_competence_annonce_fk_ref_competence_annonce" Association="Self.ref_competence_annonce_fk_ref_competence_annonce">
+      <End Role="t_annonce" EntitySet="t_annonce" />
+      <End Role="ref_competence_annonce" EntitySet="ref_competence_annonce" />
+    </AssociationSet>
+    <AssociationSet Name="t_annonce_fk_t_annonce" Association="Self.t_annonce_fk_t_annonce">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_annonce" EntitySet="t_annonce" />
+    </AssociationSet>
+    <AssociationSet Name="t_annonce_fk_t_annonce_0" Association="Self.t_annonce_fk_t_annonce_0">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_annonce" EntitySet="t_annonce" />
+    </AssociationSet>
+    <AssociationSet Name="t_annonce_fk_t_annonce_1" Association="Self.t_annonce_fk_t_annonce_1">
+      <End Role="t_statut_annonce" EntitySet="t_statut_annonce" />
+      <End Role="t_annonce" EntitySet="t_annonce" />
+    </AssociationSet>
+    <AssociationSet Name="t_annonce_proposition_fk_t_annonce_proposition" Association="Self.t_annonce_proposition_fk_t_annonce_proposition">
+      <End Role="t_annonce" EntitySet="t_annonce" />
+      <End Role="t_annonce_proposition" EntitySet="t_annonce_proposition" />
+    </AssociationSet>
+    <AssociationSet Name="t_annonce_proposition_fk_t_annonce_proposition_0" Association="Self.t_annonce_proposition_fk_t_annonce_proposition_0">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_annonce_proposition" EntitySet="t_annonce_proposition" />
+    </AssociationSet>
+    <AssociationSet Name="t_carte_bancaire_fk_t_carte_bancaire_0" Association="Self.t_carte_bancaire_fk_t_carte_bancaire_0">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_carte_bancaire" EntitySet="t_carte_bancaire" />
+    </AssociationSet>
+    <AssociationSet Name="t_competence_fk_t_competence" Association="Self.t_competence_fk_t_competence">
+      <End Role="t_category_competence" EntitySet="t_category_competence" />
+      <End Role="t_competence" EntitySet="t_competence" />
+    </AssociationSet>
+    <AssociationSet Name="ref_competence_annonce_fk_ref_competence_annonce_0" Association="Self.ref_competence_annonce_fk_ref_competence_annonce_0">
+      <End Role="t_competence" EntitySet="t_competence" />
+      <End Role="ref_competence_annonce" EntitySet="ref_competence_annonce" />
+    </AssociationSet>
+    <AssociationSet Name="ref_competence_group_fk_ref_competence_group" Association="Self.ref_competence_group_fk_ref_competence_group">
+      <End Role="t_competence" EntitySet="t_competence" />
+      <End Role="ref_competence_group" EntitySet="ref_competence_group" />
+    </AssociationSet>
+    <AssociationSet Name="t_departement_fk_t_departement" Association="Self.t_departement_fk_t_departement">
+      <End Role="t_regions" EntitySet="t_regions" />
+      <End Role="t_departement" EntitySet="t_departement" />
+    </AssociationSet>
+    <AssociationSet Name="t_villes_fk_t_villes" Association="Self.t_villes_fk_t_villes">
+      <End Role="t_departement" EntitySet="t_departement" />
+      <End Role="t_villes" EntitySet="t_villes" />
+    </AssociationSet>
+    <AssociationSet Name="ref_competence_group_fk_ref_competence_group_0" Association="Self.ref_competence_group_fk_ref_competence_group_0">
+      <End Role="t_group" EntitySet="t_group" />
+      <End Role="ref_competence_group" EntitySet="ref_competence_group" />
+    </AssociationSet>
+    <AssociationSet Name="t_member_group_fk_t_member_group_0" Association="Self.t_member_group_fk_t_member_group_0">
+      <End Role="t_group" EntitySet="t_group" />
+      <End Role="t_member_group" EntitySet="t_member_group" />
+    </AssociationSet>
+    <AssociationSet Name="t_user_info_fk_id_level" Association="Self.t_user_info_fk_id_level">
+      <End Role="t_level" EntitySet="t_level" />
+      <End Role="t_user_info" EntitySet="t_user_info" />
+    </AssociationSet>
+    <AssociationSet Name="t_member_group_fk_t_member_group" Association="Self.t_member_group_fk_t_member_group">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_member_group" EntitySet="t_member_group" />
+    </AssociationSet>
+    <AssociationSet Name="t_regions_fk_t_region" Association="Self.t_regions_fk_t_region">
+      <End Role="t_pays" EntitySet="t_pays" />
+      <End Role="t_regions" EntitySet="t_regions" />
+    </AssociationSet>
+    <AssociationSet Name="t_recompense_fk_t_recompense" Association="Self.t_recompense_fk_t_recompense">
+      <End Role="t_type_user" EntitySet="t_type_user" />
+      <End Role="t_recompense" EntitySet="t_recompense" />
+    </AssociationSet>
+    <AssociationSet Name="t_recompense_user_fk_t_recompense_user" Association="Self.t_recompense_user_fk_t_recompense_user">
+      <End Role="t_recompense" EntitySet="t_recompense" />
+      <End Role="t_recompense_user" EntitySet="t_recompense_user" />
+    </AssociationSet>
+    <AssociationSet Name="t_recompense_user_fk_t_recompense_user_0" Association="Self.t_recompense_user_fk_t_recompense_user_0">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_recompense_user" EntitySet="t_recompense_user" />
+    </AssociationSet>
+    <AssociationSet Name="t_user_info_fk_t_user_info_0" Association="Self.t_user_info_fk_t_user_info_0">
+      <End Role="t_type_user" EntitySet="t_type_user" />
+      <End Role="t_user_info" EntitySet="t_user_info" />
+    </AssociationSet>
+    <AssociationSet Name="t_user_info_fk_user_userinfo" Association="Self.t_user_info_fk_user_userinfo">
+      <End Role="t_user" EntitySet="t_user" />
+      <End Role="t_user_info" EntitySet="t_user_info" />
+    </AssociationSet>
+    <AssociationSet Name="ref_facturation_historique" Association="Self.ref_facturation_historique">
+      <End Role="t_ref_facturation_historique" EntitySet="t_ref_facturation_historique" />
+      <End Role="t_user" EntitySet="t_user" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

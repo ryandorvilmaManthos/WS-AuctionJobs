@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="auctionjobModelStoreContainer" CdmEntityContainer="AuctionJobEntities">
+    <EntitySetMapping Name="ref_banque">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_banque">
+        <MappingFragment StoreEntitySet="ref_banque">
+          <ScalarProperty Name="id_banque" ColumnName="id_banque" />
+          <ScalarProperty Name="fk_id_pays" ColumnName="fk_id_pays" />
+          <ScalarProperty Name="banq_nom" ColumnName="banq_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ref_competence_user">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_competence_user">
+        <MappingFragment StoreEntitySet="ref_competence_user">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+          <ScalarProperty Name="lvl_competence" ColumnName="lvl_competence" />
+          <ScalarProperty Name="isactually" ColumnName="isactually" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ref_status_facture">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_status_facture">
+        <MappingFragment StoreEntitySet="ref_status_facture">
+          <ScalarProperty Name="id_facture" ColumnName="id_facture" />
+          <ScalarProperty Name="fact_nom" ColumnName="fact_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ref_type_carte_bancaire">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_type_carte_bancaire">
+        <MappingFragment StoreEntitySet="ref_type_carte_bancaire">
+          <ScalarProperty Name="id_type" ColumnName="id_type" />
+          <ScalarProperty Name="tcb_nom" ColumnName="tcb_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ref_user_adress">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_user_adress">
+        <MappingFragment StoreEntitySet="ref_user_adress">
+          <ScalarProperty Name="fk_user_id" ColumnName="fk_user_id" />
+          <ScalarProperty Name="fk_adresse_id" ColumnName="fk_adresse_id" />
+          <ScalarProperty Name="id_ref_id" ColumnName="id_ref_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_adresse">
+      <EntityTypeMapping TypeName="auctionjobModel.t_adresse">
+        <MappingFragment StoreEntitySet="t_adresse">
+          <ScalarProperty Name="id_adresse" ColumnName="id_adresse" />
+          <ScalarProperty Name="id_ville" ColumnName="id_ville" />
+          <ScalarProperty Name="adr_libelle" ColumnName="adr_libelle" />
+          <ScalarProperty Name="adr_date_modification" ColumnName="adr_date_modification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_annonce">
+      <EntityTypeMapping TypeName="auctionjobModel.t_annonce">
+        <MappingFragment StoreEntitySet="t_annonce">
+          <ScalarProperty Name="id_annonce" ColumnName="id_annonce" />
+          <ScalarProperty Name="fk_id_useradmin" ColumnName="fk_id_useradmin" />
+          <ScalarProperty Name="fk_id_user_win" ColumnName="fk_id_user_win" />
+          <ScalarProperty Name="fk_id_statutannonce" ColumnName="fk_id_statutannonce" />
+          <ScalarProperty Name="fk_id_category" ColumnName="fk_id_category" />
+          <ScalarProperty Name="fk_id_adresse" ColumnName="fk_id_adresse" />
+          <ScalarProperty Name="annonce_title" ColumnName="annonce_title" />
+          <ScalarProperty Name="annonce_subtittle" ColumnName="annonce_subtittle" />
+          <ScalarProperty Name="annonce_description_mission" ColumnName="annonce_description_mission" />
+          <ScalarProperty Name="annonce_prix" ColumnName="annonce_prix" />
+          <ScalarProperty Name="annonce_validate" ColumnName="annonce_validate" />
+          <ScalarProperty Name="annonce_start" ColumnName="annonce_start" />
+          <ScalarProperty Name="annonce_deadline" ColumnName="annonce_deadline" />
+          <ScalarProperty Name="annonce_modification" ColumnName="annonce_modification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_annonce_proposition">
+      <EntityTypeMapping TypeName="auctionjobModel.t_annonce_proposition">
+        <MappingFragment StoreEntitySet="t_annonce_proposition">
+          <ScalarProperty Name="id_anno_proposition" ColumnName="id_anno_proposition" />
+          <ScalarProperty Name="fk_id_user" ColumnName="fk_id_user" />
+          <ScalarProperty Name="fk_id_annonce" ColumnName="fk_id_annonce" />
+          <ScalarProperty Name="annopro_description" ColumnName="annopro_description" />
+          <ScalarProperty Name="annopro_prix" ColumnName="annopro_prix" />
+          <ScalarProperty Name="annopro_create" ColumnName="annopro_create" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_carte_bancaire">
+      <EntityTypeMapping TypeName="auctionjobModel.t_carte_bancaire">
+        <MappingFragment StoreEntitySet="t_carte_bancaire">
+          <ScalarProperty Name="id_carte_bancaire" ColumnName="id_carte_bancaire" />
+          <ScalarProperty Name="fk_id_typecarte" ColumnName="fk_id_typecarte" />
+          <ScalarProperty Name="fk_id_utilisateur" ColumnName="fk_id_utilisateur" />
+          <ScalarProperty Name="fk_id_banque" ColumnName="fk_id_banque" />
+          <ScalarProperty Name="cb_date_expiration" ColumnName="cb_date_expiration" />
+          <ScalarProperty Name="cb_nom" ColumnName="cb_nom" />
+          <ScalarProperty Name="cb_prenom" ColumnName="cb_prenom" />
+          <ScalarProperty Name="cb_prix_facturation" ColumnName="cb_prix_facturation" />
+          <ScalarProperty Name="cb_crypto" ColumnName="cb_crypto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_category_competence">
+      <EntityTypeMapping TypeName="auctionjobModel.t_category_competence">
+        <MappingFragment StoreEntitySet="t_category_competence">
+          <ScalarProperty Name="id_category_comp" ColumnName="id_category_comp" />
+          <ScalarProperty Name="category_comp_nom" ColumnName="category_comp_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_competence">
+      <EntityTypeMapping TypeName="auctionjobModel.t_competence">
+        <MappingFragment StoreEntitySet="t_competence">
+          <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+          <ScalarProperty Name="fk_id_category_com" ColumnName="fk_id_category_com" />
+          <ScalarProperty Name="competence_nom" ColumnName="competence_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_departement">
+      <EntityTypeMapping TypeName="auctionjobModel.t_departement">
+        <MappingFragment StoreEntitySet="t_departement">
+          <ScalarProperty Name="id_departement" ColumnName="id_departement" />
+          <ScalarProperty Name="id_region" ColumnName="id_region" />
+          <ScalarProperty Name="departement_code" ColumnName="departement_code" />
+          <ScalarProperty Name="departement_nom" ColumnName="departement_nom" />
+          <ScalarProperty Name="departement_nom_uppercase" ColumnName="departement_nom_uppercase" />
+          <ScalarProperty Name="departement_slug" ColumnName="departement_slug" />
+          <ScalarProperty Name="departement_nom_soundex" ColumnName="departement_nom_soundex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_group">
+      <EntityTypeMapping TypeName="auctionjobModel.t_group">
+        <MappingFragment StoreEntitySet="t_group">
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="fk_id_user_admin" ColumnName="fk_id_user_admin" />
+          <ScalarProperty Name="group_nom" ColumnName="group_nom" />
+          <ScalarProperty Name="group_description" ColumnName="group_description" />
+          <ScalarProperty Name="group_create" ColumnName="group_create" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_level">
+      <EntityTypeMapping TypeName="auctionjobModel.t_level">
+        <MappingFragment StoreEntitySet="t_level">
+          <ScalarProperty Name="id_level" ColumnName="id_level" />
+          <ScalarProperty Name="level_xp_up" ColumnName="level_xp_up" />
+          <ScalarProperty Name="level_Rank" ColumnName="level_Rank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_member_group">
+      <EntityTypeMapping TypeName="auctionjobModel.t_member_group">
+        <MappingFragment StoreEntitySet="t_member_group">
+          <ScalarProperty Name="id_member" ColumnName="id_member" />
+          <ScalarProperty Name="fk_id_user" ColumnName="fk_id_user" />
+          <ScalarProperty Name="fk_id_group" ColumnName="fk_id_group" />
+          <ScalarProperty Name="member_group_isenable" ColumnName="member_group_isenable" />
+          <ScalarProperty Name="member_group_date" ColumnName="member_group_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_pays">
+      <EntityTypeMapping TypeName="auctionjobModel.t_pays">
+        <MappingFragment StoreEntitySet="t_pays">
+          <ScalarProperty Name="id_pays" ColumnName="id_pays" />
+          <ScalarProperty Name="pays_code" ColumnName="pays_code" />
+          <ScalarProperty Name="pays_alpha2" ColumnName="pays_alpha2" />
+          <ScalarProperty Name="pays_alpha3" ColumnName="pays_alpha3" />
+          <ScalarProperty Name="pays_nom_fr_fr" ColumnName="pays_nom_fr_fr" />
+          <ScalarProperty Name="pays_nom_en_gb" ColumnName="pays_nom_en_gb" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_pins">
+      <EntityTypeMapping TypeName="auctionjobModel.t_pins">
+        <MappingFragment StoreEntitySet="t_pins">
+          <ScalarProperty Name="id_pins" ColumnName="id_pins" />
+          <ScalarProperty Name="fk_id_type_user" ColumnName="fk_id_type_user" />
+          <ScalarProperty Name="pins_title" ColumnName="pins_title" />
+          <ScalarProperty Name="pins_subtitle" ColumnName="pins_subtitle" />
+          <ScalarProperty Name="pins_description" ColumnName="pins_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_recompense">
+      <EntityTypeMapping TypeName="auctionjobModel.t_recompense">
+        <MappingFragment StoreEntitySet="t_recompense">
+          <ScalarProperty Name="id_recompense" ColumnName="id_recompense" />
+          <ScalarProperty Name="recompense_nom" ColumnName="recompense_nom" />
+          <ScalarProperty Name="recompense_description" ColumnName="recompense_description" />
+          <ScalarProperty Name="recompense_credit" ColumnName="recompense_credit" />
+          <ScalarProperty Name="recompense_xp" ColumnName="recompense_xp" />
+          <ScalarProperty Name="recompense_type_user" ColumnName="recompense_type_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_recompense_user">
+      <EntityTypeMapping TypeName="auctionjobModel.t_recompense_user">
+        <MappingFragment StoreEntitySet="t_recompense_user">
+          <ScalarProperty Name="id_recompense_user" ColumnName="id_recompense_user" />
+          <ScalarProperty Name="fk_id_user" ColumnName="fk_id_user" />
+          <ScalarProperty Name="fk_id_recompense" ColumnName="fk_id_recompense" />
+          <ScalarProperty Name="date_obtention" ColumnName="date_obtention" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_ref_facturation_historique">
+      <EntityTypeMapping TypeName="auctionjobModel.t_ref_facturation_historique">
+        <MappingFragment StoreEntitySet="t_ref_facturation_historique">
+          <ScalarProperty Name="id_facturation" ColumnName="id_facturation" />
+          <ScalarProperty Name="fk_id_statut_facturation" ColumnName="fk_id_statut_facturation" />
+          <ScalarProperty Name="date_modification" ColumnName="date_modification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_regions">
+      <EntityTypeMapping TypeName="auctionjobModel.t_regions">
+        <MappingFragment StoreEntitySet="t_regions">
+          <ScalarProperty Name="id_region" ColumnName="id_region" />
+          <ScalarProperty Name="id_pays" ColumnName="id_pays" />
+          <ScalarProperty Name="region_nom" ColumnName="region_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_statut_annonce">
+      <EntityTypeMapping TypeName="auctionjobModel.t_statut_annonce">
+        <MappingFragment StoreEntitySet="t_statut_annonce">
+          <ScalarProperty Name="id_statutannonce" ColumnName="id_statutannonce" />
+          <ScalarProperty Name="statutannonce_nom" ColumnName="statutannonce_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_type_user">
+      <EntityTypeMapping TypeName="auctionjobModel.t_type_user">
+        <MappingFragment StoreEntitySet="t_type_user">
+          <ScalarProperty Name="id_typeuser" ColumnName="id_typeuser" />
+          <ScalarProperty Name="typeuser_nom" ColumnName="typeuser_nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_user">
+      <EntityTypeMapping TypeName="auctionjobModel.t_user">
+        <MappingFragment StoreEntitySet="t_user">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="user_nom" ColumnName="user_nom" />
+          <ScalarProperty Name="user_prenom" ColumnName="user_prenom" />
+          <ScalarProperty Name="user_mail" ColumnName="user_mail" />
+          <ScalarProperty Name="user_mdp" ColumnName="user_mdp" />
+          <ScalarProperty Name="user_datenaissance" ColumnName="user_datenaissance" />
+          <ScalarProperty Name="user_isactif" ColumnName="user_isactif" />
+          <ScalarProperty Name="user_ip" ColumnName="user_ip" />
+          <ScalarProperty Name="user_create" ColumnName="user_create" />
+          <ScalarProperty Name="user_modif" ColumnName="user_modif" />
+          <ScalarProperty Name="user_last_connexion" ColumnName="user_last_connexion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_user_info">
+      <EntityTypeMapping TypeName="auctionjobModel.t_user_info">
+        <MappingFragment StoreEntitySet="t_user_info">
+          <ScalarProperty Name="id_fk_user" ColumnName="id_fk_user" />
+          <ScalarProperty Name="fk_id_typeuser" ColumnName="fk_id_typeuser" />
+          <ScalarProperty Name="fk_id_adresse" ColumnName="fk_id_adresse" />
+          <ScalarProperty Name="fk_id_level" ColumnName="fk_id_level" />
+          <ScalarProperty Name="userinfo_exp" ColumnName="userinfo_exp" />
+          <ScalarProperty Name="userinfo_image" ColumnName="userinfo_image" />
+          <ScalarProperty Name="userinfo_date_modfif" ColumnName="userinfo_date_modfif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_villes">
+      <EntityTypeMapping TypeName="auctionjobModel.t_villes">
+        <MappingFragment StoreEntitySet="t_villes">
+          <ScalarProperty Name="id_villes" ColumnName="id_villes" />
+          <ScalarProperty Name="id_departement" ColumnName="id_departement" />
+          <ScalarProperty Name="ville_slug" ColumnName="ville_slug" />
+          <ScalarProperty Name="ville_nom" ColumnName="ville_nom" />
+          <ScalarProperty Name="ville_nom_simple" ColumnName="ville_nom_simple" />
+          <ScalarProperty Name="ville_nom_reel" ColumnName="ville_nom_reel" />
+          <ScalarProperty Name="ville_nom_soundex" ColumnName="ville_nom_soundex" />
+          <ScalarProperty Name="ville_nom_metaphone" ColumnName="ville_nom_metaphone" />
+          <ScalarProperty Name="ville_code_postal" ColumnName="ville_code_postal" />
+          <ScalarProperty Name="ville_commune" ColumnName="ville_commune" />
+          <ScalarProperty Name="ville_code_commune" ColumnName="ville_code_commune" />
+          <ScalarProperty Name="ville_arrondissement" ColumnName="ville_arrondissement" />
+          <ScalarProperty Name="ville_canton" ColumnName="ville_canton" />
+          <ScalarProperty Name="ville_amdi" ColumnName="ville_amdi" />
+          <ScalarProperty Name="ville_longitude_deg" ColumnName="ville_longitude_deg" />
+          <ScalarProperty Name="ville_latitude_deg" ColumnName="ville_latitude_deg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ref_competence_annonce">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_competence_annonce">
+        <MappingFragment StoreEntitySet="ref_competence_annonce">
+          <ScalarProperty Name="id_annonce" ColumnName="id_annonce" />
+          <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+          <ScalarProperty Name="lvl_wait" ColumnName="lvl_wait" />
+          <ScalarProperty Name="isactually" ColumnName="isactually" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ref_competence_group">
+      <EntityTypeMapping TypeName="auctionjobModel.ref_competence_group">
+        <MappingFragment StoreEntitySet="ref_competence_group">
+          <ScalarProperty Name="id_competence" ColumnName="id_competence" />
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="is_actually" ColumnName="is_actually" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ref_facturation_historique" TypeName="auctionjobModel.ref_facturation_historique" StoreEntitySet="ref_facturation_historique">
+      <EndProperty Name="t_ref_facturation_historique">
+        <ScalarProperty Name="id_facturation" ColumnName="fk_id_facturation" />
+      </EndProperty>
+      <EndProperty Name="t_user">
+        <ScalarProperty Name="id_user" ColumnName="fk_id_utilisateur" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
