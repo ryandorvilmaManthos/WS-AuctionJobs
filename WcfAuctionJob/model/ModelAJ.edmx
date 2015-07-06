@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AuctionJobModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AuctionJobModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ref_banque">
           <Key>
             <PropertyRef Name="id_banque" />
@@ -14,7 +14,7 @@
           <Property Name="banq_nom" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_competence_annonce' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\APP_DATA\AUCTIONJOB.MDF.dbo.ref_competence_annonce' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ref_competence_annonce">
           <Key>
             <PropertyRef Name="id_competence" />
@@ -27,7 +27,7 @@ avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\W
           <Property Name="isactually" Type="smallint" Nullable="false" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_competence_group' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\APP_DATA\AUCTIONJOB.MDF.dbo.ref_competence_group' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ref_competence_group">
           <Key>
             <PropertyRef Name="id_competence" />
@@ -49,7 +49,7 @@ avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\W
           <Property Name="isactually" Type="smallint" Nullable="false" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_facturation_historique' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\APP_DATA\AUCTIONJOB.MDF.dbo.ref_facturation_historique' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ref_facturation_historique">
           <Key>
             <PropertyRef Name="fk_id_facturation" />
@@ -59,7 +59,7 @@ avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\W
           <Property Name="fk_id_utilisateur" Type="int" Nullable="false" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
-avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_pins_user' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\APP_DATA\AUCTIONJOB.MDF.dbo.ref_pins_user' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
         <EntityType Name="ref_pins_user">
           <Property Name="id_pins" Type="int" />
           <Property Name="id_user" Type="int" />
@@ -416,10 +416,10 @@ avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'C:\US
           </ReferentialConstraint>
         </Association>
         <!--Erreurs détectées durant la génération :
-erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_pins_user' est référencée par une relation, mais elle est introuvable.
+erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\APP_DATA\AUCTIONJOB.MDF.dbo.ref_pins_user' est référencée par une relation, mais elle est introuvable.
         <Association Name="ref_pins_user$fk_ref_pins_user" />-->
         <!--Erreurs détectées durant la génération :
-erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_pins_user' est référencée par une relation, mais elle est introuvable.
+erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\APP_DATA\AUCTIONJOB.MDF.dbo.ref_pins_user' est référencée par une relation, mais elle est introuvable.
         <Association Name="ref_pins_user$fk_ref_pins_user_0" />-->
         <Association Name="ref_user_adress$fk_adress_user">
           <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="1">
@@ -908,7 +908,8 @@ erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJO
             <End Role="t_villes" EntitySet="t_villes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuctionJobModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2153,7 +2154,7 @@ erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJO
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
