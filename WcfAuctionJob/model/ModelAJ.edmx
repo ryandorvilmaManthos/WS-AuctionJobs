@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AuctionJobModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AuctionJobModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ref_banque">
           <Key>
             <PropertyRef Name="id_banque" />
@@ -13,8 +13,8 @@
           <Property Name="fk_id_pays" Type="int" Nullable="false" />
           <Property Name="banq_nom" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'auctionjob.dbo.ref_competence_annonce' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_competence_annonce' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ref_competence_annonce">
           <Key>
             <PropertyRef Name="id_competence" />
@@ -26,8 +26,8 @@ warning 6002: The table/view 'auctionjob.dbo.ref_competence_annonce' does not ha
           <Property Name="lvl_wait" Type="int" Nullable="false" />
           <Property Name="isactually" Type="smallint" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'auctionjob.dbo.ref_competence_group' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_competence_group' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ref_competence_group">
           <Key>
             <PropertyRef Name="id_competence" />
@@ -48,8 +48,8 @@ warning 6002: The table/view 'auctionjob.dbo.ref_competence_group' does not have
           <Property Name="lvl_competence" Type="int" Nullable="false" />
           <Property Name="isactually" Type="smallint" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'auctionjob.dbo.ref_facturation_historique' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_facturation_historique' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ref_facturation_historique">
           <Key>
             <PropertyRef Name="fk_id_facturation" />
@@ -58,8 +58,8 @@ warning 6002: The table/view 'auctionjob.dbo.ref_facturation_historique' does no
           <Property Name="fk_id_facturation" Type="int" Nullable="false" />
           <Property Name="fk_id_utilisateur" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'auctionjob.dbo.ref_pins_user' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <!--Erreurs détectées durant la génération :
+avertissement 6013: Aucune clé primaire n'est définie pour la table/vue 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_pins_user' ; en outre, aucune clé primaire valide n'a pu être déduite. Cette table/vue a été exclue. Pour utiliser l'entité, vous devez passer en revue votre schéma, ajouter les clés appropriées et supprimer le commentaire associé.
         <EntityType Name="ref_pins_user">
           <Property Name="id_pins" Type="int" />
           <Property Name="id_user" Type="int" />
@@ -415,11 +415,11 @@ warning 6013: The table/view 'auctionjob.dbo.ref_pins_user' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'auctionjob.dbo.ref_pins_user' is referenced by a relationship, but cannot be found.
+        <!--Erreurs détectées durant la génération :
+erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_pins_user' est référencée par une relation, mais elle est introuvable.
         <Association Name="ref_pins_user$fk_ref_pins_user" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'auctionjob.dbo.ref_pins_user' is referenced by a relationship, but cannot be found.
+        <!--Erreurs détectées durant la génération :
+erreur 6004: La table 'C:\USERS\THOMAS\DOCUMENTS\GITHUBVISUALSTUDIO\WS-AUCTIONJOBS\WCFAUCTIONJOB\DATABASE\AUCTIONJOB.MDF.dbo.ref_pins_user' est référencée par une relation, mais elle est introuvable.
         <Association Name="ref_pins_user$fk_ref_pins_user_0" />-->
         <Association Name="ref_user_adress$fk_adress_user">
           <End Role="t_adresse" Type="Self.t_adresse" Multiplicity="1">
@@ -908,8 +908,7 @@ error 6004: The table 'auctionjob.dbo.ref_pins_user' is referenced by a relation
             <End Role="t_villes" EntitySet="t_villes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuctionJobModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
