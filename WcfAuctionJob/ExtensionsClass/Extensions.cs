@@ -69,24 +69,39 @@ namespace WcfAuctionJob.ExtensionsClass
                 }
                 else
                 {
-                    //Test if class implements ICollection
                     
-                    if (typeOutput == typeof(ICollection<>))
+                   
+                    //Test if class implements ICollection
+                    //var isAssignableFrom =  == typeOutput;
+                    if (typeOutput.GenericTypeArguments.FirstOrDefault() != null)
                     {
-                        //Get all value of Collection property
-                        object inputList = inputType.GetProperty(memberInfo.Name).GetValue(input, null);
+                        if (typeof (ICollection<>).MakeGenericType(typeOutput.GenericTypeArguments.FirstOrDefault()) ==
+                            typeOutput)
+                        {
+                            //Get all value of Collection property
+                            object inputList = inputType.GetProperty(memberInfo.Name).GetValue(input, null);
 
-                        //Call extension method "ConvertAll" to convert
-                        object convertResult = CallConvertAll(typeInput.GenericTypeArguments.First(),
-                            typeOutput.GenericTypeArguments.First(), new[] {inputList});
-                        
-                        //new generic list
-                        resultObject = Activator.CreateInstance(GetListType<T>(), convertResult);
+                            //Call extension method "ConvertAll" to convert
+                            object convertResult = CallConvertAll(typeInput.GenericTypeArguments.First(),
+                                typeOutput.GenericTypeArguments.First(), new[] {inputList});
+                            var listType =
+                                (Type)typeof (Extensions).GetMethod("GetListType")
+                                    .MakeGenericMethod(typeOutput.GenericTypeArguments.FirstOrDefault())
+                                    .Invoke(null, null);
+                            //new generic list
+                            resultObject =  Activator.CreateInstance(listType, convertResult);
+                        }
+                        else
+                        {
+                            resultObject = inputProperty.GetValue(input, null);
+                        }
+                       
                     }
-                    else 
+                    else
                     {
                         resultObject = inputProperty.GetValue(input, null);
                     }
+                    
                     
                 }
                 //Set output value
