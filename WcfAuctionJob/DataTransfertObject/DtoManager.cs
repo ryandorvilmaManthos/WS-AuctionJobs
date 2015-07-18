@@ -18,8 +18,6 @@ namespace WcfAuctionJob.DataTransfertObject
             TOut bddClass = dtoClass.Convert<TOut, TIn>();
             using (AuctionJobEntities bddEntities = new AuctionJobEntities())
             {
-               
-                DbSet<TOut> dbSet = bddEntities.Set<TOut>();
                 bddEntities.Set<TOut>().Add(bddClass);
                 bddEntities.SaveChanges();
             }
@@ -37,7 +35,6 @@ namespace WcfAuctionJob.DataTransfertObject
                 }
             }
         }
-
         
         public static void Delete<TOut>(int id) where TOut : class
         {
