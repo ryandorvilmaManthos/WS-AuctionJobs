@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
+using WcfAuctionJob.DataTransfertObject;
+using WcfAuctionJob.model;
 
 namespace WcfAuctionJob.ExtensionsClass
 {
@@ -42,8 +45,8 @@ namespace WcfAuctionJob.ExtensionsClass
 
                 //Test if class implements IDictionnary
                 object resultObject;
-
                 
+
                 if (typeof(IDictionary).IsAssignableFrom(typeOutput))
                 {
                     // Get all value of Dictionnary property
@@ -66,34 +69,39 @@ namespace WcfAuctionJob.ExtensionsClass
                 }
                 else
                 {
+                    
+                   
                     //Test if class implements ICollection
-                    if (typeof (ICollection).IsAssignableFrom(typeOutput))
+                    //var isAssignableFrom =  == typeOutput;
+                    if (typeOutput.GenericTypeArguments.FirstOrDefault() != null)
                     {
-                        //Get all value of Collection property
-                        object inputList = inputType.GetProperty(memberInfo.Name).GetValue(input, null);
-
-                        //Call extension method "ConvertAll" to convert
-                        object convertResult = CallConvertAll(typeInput.GenericTypeArguments.First(),
-                            typeOutput.GenericTypeArguments.First(), new[] {inputList});
-
-                        //new generic list
-                        Type genericType = typeof (List<>).MakeGenericType(typeOutput.GenericTypeArguments.First());
-                        resultObject = Activator.CreateInstance(genericType, convertResult);
-                    }
-                    else 
-                    {
-                        if (typeInput == typeof(HashSet<T>))
+                        if (typeof (ICollection<>).MakeGenericType(typeOutput.GenericTypeArguments.FirstOrDefault()) ==
+                            typeOutput)
                         {
-                            Console.WriteLine("test");
-                            resultObject = null;
+                            //Get all value of Collection property
+                            object inputList = inputType.GetProperty(memberInfo.Name).GetValue(input, null);
+
+                            //Call extension method "ConvertAll" to convert
+                            object convertResult = CallConvertAll(typeInput.GenericTypeArguments.First(),
+                                typeOutput.GenericTypeArguments.First(), new[] {inputList});
+                            var listType =
+                                (Type)typeof (Extensions).GetMethod("GetListType")
+                                    .MakeGenericMethod(typeOutput.GenericTypeArguments.FirstOrDefault())
+                                    .Invoke(null, null);
+                            //new generic list
+                            resultObject =  Activator.CreateInstance(listType, convertResult);
                         }
                         else
                         {
-                            //Get input value
                             resultObject = inputProperty.GetValue(input, null);
-
                         }
+                       
                     }
+                    else
+                    {
+                        resultObject = inputProperty.GetValue(input, null);
+                    }
+                    
                     
                 }
                 //Set output value
@@ -113,6 +121,16 @@ namespace WcfAuctionJob.ExtensionsClass
                 .MakeGenericMethod(outputType,
                     inputType)
                 .Invoke(null, param);
+        }
+
+        public static Type GetListType<T>()
+        {
+            PropertyInfo property = typeof(AuctionJobEntities).GetProperty(typeof(T).Name);
+            if (property != null)
+            {
+                return typeof(HashSet<>).MakeGenericType(typeof(T));
+            }
+            return typeof(List<>).MakeGenericType(typeof(T));
         }
 
 
